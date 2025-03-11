@@ -17,12 +17,12 @@ namespace PersonalFinance.Domain.Models
         public double? amount { get; set; }
 
         public TransactionType TransactionType { get; set; }
-        public Category? CategoryTransaction { get; set; }
+        public Category? Category { get; set; }
 
-        public int? CategoryTransactionId { get; set; }
+        public int? CategoryId { get; set; }
 
 
-        public List<Note> TransactionNoteList { get; set; }
+        public List<TransactionNotes?> TransactionNoteList { get; set; }
 
 
     }

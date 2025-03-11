@@ -14,5 +14,7 @@ namespace PersonalFinance.Domain.Models
 
         public List<Transaction?> TransactionList { get; set; }
 
+        public List<AccountUserBudget?> AccountUserBudgetList { get; set; }
+
     }
 }

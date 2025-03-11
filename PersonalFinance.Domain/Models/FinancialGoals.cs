@@ -11,11 +11,15 @@ namespace PersonalFinance.Domain.Models
     {
         public int Id { get; set; }
 
-        public string? goalText { get; set; }
-        public DateTime? goalReachInTime { get; set; }
+        public string goalText { get; set; }
+        public DateTime goalReachInTime { get; set; }
 
+        public double amountGoal { get; set; }
 
-        public List<AccountUser?> FinancialGoalsAccountUserList{ get; set; }
+        public List<AccountUserFinancialGoals?> AccountUserFinancialGoalList { get; set; }
+
+        public int Year => goalReachInTime.Year;
+        public int Month => goalReachInTime.Month;
 
     }
 }

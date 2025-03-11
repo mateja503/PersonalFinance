@@ -19,11 +19,14 @@ namespace PersonalFinance.Repository.Configuration
                 .IsRequired()
                 .HasMaxLength(300);
 
-            builder.HasMany(f => f.FinancialGoalsAccountUserList)
-                .WithMany(a => a.AccontUserFinancialGoalList)
-                .UsingEntity<AccountUserFinancialGoals>(
-                    //to do
-                );
+            builder.Property(u => u.goalReachInTime)
+                .IsRequired();
+
+            builder.Property(u => u.amountGoal)
+                .IsRequired()
+                .HasColumnType("decimal(18,2)");
+
+                
         }
     }
 }

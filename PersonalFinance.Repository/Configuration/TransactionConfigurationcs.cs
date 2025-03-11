@@ -21,8 +21,16 @@ namespace PersonalFinance.Repository.Configuration
             builder.Property(u => u.amount)
                 .IsRequired()
                 .HasColumnType("decimal(18,2)");
-               
-            // todo
+
+            builder.Property(u => u.TransactionType)
+                .IsRequired()
+                .HasConversion<int>();
+
+            builder.HasOne(u => u.Category)
+                .WithMany(u => u.TransactionList)
+                .HasForeignKey(u=>u.CategoryId)
+                .OnDelete(DeleteBehavior.NoAction);
+         
         }
     }
 }

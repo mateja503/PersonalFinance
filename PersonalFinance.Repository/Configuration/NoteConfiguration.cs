@@ -18,13 +18,8 @@ namespace PersonalFinance.Repository.Configuration
             builder.Property(u => u.Text)
                 .IsRequired()
                 .HasMaxLength(500);
+           
 
-            builder.HasMany(n => n.NoteTransactionList)
-                .WithMany(t => t.TransactionNoteList)
-                .UsingEntity<TransactionNotes>(
-                    //to do
-                );
-                
         }
     }
 }

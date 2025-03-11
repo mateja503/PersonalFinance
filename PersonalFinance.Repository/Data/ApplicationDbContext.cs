@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using PersonalFinance.Domain.Identity;
 using PersonalFinance.Domain.Models;
 using PersonalFinance.Repository.Configuration;
@@ -17,7 +18,6 @@ namespace PersonalFinance.Repository.Data
         {
 
         }
-
         public DbSet<AccountUserBudget> AccountUserBudgets { get; set; }
         public DbSet<AccountUserFinancialGoals> AccountUserFinancialGoals { get; set; }
         public DbSet<Budget> Budgets { get; set; }
@@ -44,6 +44,108 @@ namespace PersonalFinance.Repository.Data
             new FinancialGoalsConfiguration().Configure(modelbuilder.Entity<FinancialGoals>());
             new NoteConfiguration().Configure(modelbuilder.Entity<Note>());
             new TransactionConfiguration().Configure(modelbuilder.Entity<Transaction>());
+            new AccountUserBudgetConfiguration().Configure(modelbuilder.Entity<AccountUserBudget>());
+            new AccountUserFinancialGoalsConfiguration().Configure(modelbuilder.Entity<AccountUserFinancialGoals>());
+            new TransactionNotesConfiguration().Configure(modelbuilder.Entity<TransactionNotes>());
+
+            modelbuilder.Entity<Budget>().HasData(
+                    new Budget
+                        {
+                            Id = 1,
+                            budgetAmount = 100.00,
+                            BudgetMonth = new DateTime(2024,4,1)//year month day
+
+                        }
+
+                );
+
+                modelbuilder.Entity<Category>().HasData(
+                     new Category
+                     {
+                         Id = 1,
+                         categoryName = "Намирници-Храна",
+                     },
+                       new Category
+                       {
+                           Id = 2,
+                           categoryName = "Плата",
+                       }
+
+                 );
+
+                modelbuilder.Entity<FinancialGoals>().HasData(
+                   new FinancialGoals
+                   {
+                       Id = 1,
+                       goalText = "Потребни ми се 21.000$ за целосно опремување на стан",
+                       goalReachInTime = new DateTime(2024, 8, 1),
+                       amountGoal = 21000.00
+
+                   }
+
+               );
+
+            modelbuilder.Entity<Note>().HasData(
+               new Note
+               {
+                   Id = 1,
+                   Text = "Купено Леб,Сирење,Чајна",
+                  
+               },
+               new Note
+               {
+                   Id = 2,
+                   Text = "Плата од фирма Апдомен чувај за стан!!!!",
+
+               }
+
+
+           );
+
+            modelbuilder.Entity<Transaction>().HasData(
+             new Transaction
+             {
+                 Id = 1,
+                 dateTime = new DateTime(2024, 4, 17),
+                 TransactionType = Domain.Enum.TransactionType.Expense,
+                 amount = 200.00,
+                 CategoryId = 1,
+
+             },
+                new Transaction
+                {
+                    Id = 2,
+                    dateTime = new DateTime(2024, 4, 16),
+                    TransactionType = Domain.Enum.TransactionType.Income,
+                    amount = 500.00,
+                    CategoryId = 2,
+
+                }
+
+         );
+            
+
+                 modelbuilder.Entity<TransactionNotes>().HasData(
+             new TransactionNotes
+             {
+                 Id = 1,
+                 TransactionId = 1,
+                 NoteId = 1
+
+             },
+                new TransactionNotes
+                {
+                    Id = 2,
+                    TransactionId = 2,
+                    NoteId = 2
+
+                }
+
+         );
+
+
+
+
 
 
         }

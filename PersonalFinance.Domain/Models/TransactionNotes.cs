@@ -17,5 +17,6 @@ namespace PersonalFinance.Domain.Models
 
         public int? NoteId { get; set; }
 
+        
     }
 }

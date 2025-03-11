@@ -19,10 +19,6 @@ namespace PersonalFinance.Repository.Configuration
                 .IsRequired()
                 .HasMaxLength(100);
 
-            builder.HasMany(c => c.TransactionList)
-                .WithOne(t => t.CategoryTransaction)
-                .HasForeignKey(t => t.CategoryTransactionId)
-                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

@@ -15,12 +15,12 @@ namespace PersonalFinance.Repository.Configuration
         {
             builder.HasKey(u => u.Id);
 
-            builder.Property(u => u.dateTime)
+            builder.Property(u => u.BudgetMonth)
                 .IsRequired();
-                
 
             builder.Property(u => u.budgetAmount)
                 .HasColumnType("decimal(18,2)");
+
         }
     }
 }
