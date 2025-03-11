@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PersonalFinance.Domain.Models
 {
-    class TransactionNotes
+    public class TransactionNotes
     {
 
         public int? Id { get; set; }

@@ -9,7 +9,7 @@ namespace PersonalFinance.Domain.Models
 {
     public class AccountUserFinancialGoals
     {
-        public int Id { get; set; }
+        
 
         public AccountUser? AccountUser { get; set; }
 

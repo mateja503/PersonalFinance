@@ -20,4 +20,14 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interface\" />
+    <Folder Include="Implementation\" />
+    <Folder Include="General\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PersonalFinance.Domain\PersonalFinance.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
