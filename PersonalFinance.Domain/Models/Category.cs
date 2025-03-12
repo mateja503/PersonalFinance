@@ -12,9 +12,9 @@ namespace PersonalFinance.Domain.Models
 
         public string? categoryName { get; set; }
 
-        public List<Transaction?> TransactionList { get; set; }
+        public virtual List<Transaction?> TransactionList { get; set; }
 
-        public List<AccountUserBudget?> AccountUserBudgetList { get; set; }
+        public virtual List<AccountUserBudget?> AccountUserBudgetList { get; set; }
 
     }
 }

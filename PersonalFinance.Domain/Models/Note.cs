@@ -12,6 +12,6 @@ namespace PersonalFinance.Domain.Models
 
         public string? Text { get; set; }
 
-        public List<TransactionNotes?> TransactionNoteList { get; set; }
+        public virtual List<TransactionNotes?> TransactionNoteList { get; set; }
     }
 }

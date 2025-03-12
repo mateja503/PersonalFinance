@@ -13,8 +13,8 @@ namespace PersonalFinance.Domain.Identity
         public string Token;
         //to finish up 
 
-        public List<AccountUserFinancialGoals?> AccontUserFinancialGoalList { get; set; }
+        public virtual List<AccountUserFinancialGoals?> AccontUserFinancialGoalList { get; set; }
 
-        public List<AccountUserBudget?> AccountUserBudgetList { get; set; }
+        public virtual List<AccountUserBudget?> AccountUserBudgetList { get; set; }
     }
 }

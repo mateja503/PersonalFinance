@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PersonalFinance.Repository.Implementation
 {
-    public class AccountUserFinancialGoalsRepository : GeneralRepository<AccountUserFinancialGoals>, IAccountUserFinancialGoals
+    public class AccountUserFinancialGoalsRepository : GeneralRepository<AccountUserFinancialGoals>, IAccountUserFinancialGoalsRepository
     {
         private readonly ApplicationDbContext _db;
 

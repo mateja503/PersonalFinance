@@ -16,7 +16,7 @@ namespace PersonalFinance.Domain.Models
 
         public double amountGoal { get; set; }
 
-        public List<AccountUserFinancialGoals?> AccountUserFinancialGoalList { get; set; }
+        public virtual List<AccountUserFinancialGoals?> AccountUserFinancialGoalList { get; set; }
 
         public int Year => goalReachInTime.Year;
         public int Month => goalReachInTime.Month;

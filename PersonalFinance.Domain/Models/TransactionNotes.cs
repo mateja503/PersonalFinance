@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Castle.Components.DictionaryAdapter;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +11,12 @@ namespace PersonalFinance.Domain.Models
     {
 
         public int? Id { get; set; }
-        public Transaction? Transaction { get; set; }
+        public virtual Transaction? Transaction { get; set; }
         public int? TransactionId { get; set; }
 
-        public Note? Note { get; set; }
+        public virtual Note? Note { get; set; }
 
-        public int? NoteId { get; set; }
+        public int? NoteId { get; set; } 
 
         
     }

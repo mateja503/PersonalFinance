@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PersonalFinance.Repository.Interface
 {
-    public interface IAccountUserFinancialGoals : IGeneralRepository<AccountUserFinancialGoals>
+    public interface IAccountUserFinancialGoalsRepository : IGeneralRepository<AccountUserFinancialGoals>
     {
         public Task<AccountUserFinancialGoals> Update(AccountUserFinancialGoals accountUserFinancialGoals);
     }
