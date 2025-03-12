@@ -37,16 +37,18 @@ namespace PersonalFinance.Repository.General
             await _db.SaveChangesAsync();
             return entity;
         }
-        public async Task Delete(T entity)
+        public async Task<T> Delete(T entity)
         {
              _db.Set<T>().Remove(entity);
             await _db.SaveChangesAsync();
+            return entity;
         }
 
-        public async Task DeleteRange(IEnumerable<T> enteties)
+        public async Task<List<T>> DeleteRange(IEnumerable<T> enteties)
         {
             _db.Set<T>().RemoveRange(enteties);
             await _db.SaveChangesAsync();
+            return enteties.ToList();
         }
 
         public void Detach()

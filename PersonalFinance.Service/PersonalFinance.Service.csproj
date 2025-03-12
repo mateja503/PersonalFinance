@@ -22,10 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="General\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\PersonalFinance.Domain\PersonalFinance.Domain.csproj" />
     <ProjectReference Include="..\PersonalFinance.Repository\PersonalFinance.Repository.csproj" />
   </ItemGroup>

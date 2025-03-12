@@ -1,4 +1,7 @@
-﻿using PersonalFinance.Repository.UnifOfWorkRepository;
+﻿using PersonalFinance.Domain.Models;
+using PersonalFinance.Repository.General;
+using PersonalFinance.Repository.UnifOfWorkRepository;
+using PersonalFinance.Service.General;
 using PersonalFinance.Service.Interface;
 using System;
 using System.Collections.Generic;
@@ -8,9 +11,13 @@ using System.Threading.Tasks;
 
 namespace PersonalFinance.Service.Implementation
 {
-    public class NoteService(IUnitOfWorkRepository unitOfWork) : INoteService
+    public class NoteService : GeneralService<Note>, INoteService
     {
-        private readonly IUnitOfWorkRepository _unitOfWork = unitOfWork;
+        private readonly IGeneralRepository<Note> _repository;
 
+        public NoteService(IUnitOfWorkRepository unitOfWork) : base(unitOfWork)
+        {
+            _repository = unitOfWork.GetRepository<Note>();
+        }
     }
 }

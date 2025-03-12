@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PersonalFinance.Repository.General
+namespace PersonalFinance.Service.General
 {
-    public interface IGeneralRepository<T> where T : class
+    public interface IGeneralService<T> where T : class
     {
+
         public Task<List<T>> GetAll(Expression<Func<T, bool>>? filter = null);
 
         public Task<T> Get(Expression<Func<T, bool>> filter);

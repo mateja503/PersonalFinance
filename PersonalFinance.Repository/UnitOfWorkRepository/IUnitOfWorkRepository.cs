@@ -1,4 +1,5 @@
-﻿using PersonalFinance.Repository.Interface;
+﻿using PersonalFinance.Repository.General;
+using PersonalFinance.Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,12 @@ namespace PersonalFinance.Repository.UnifOfWorkRepository
 {
     public interface IUnitOfWorkRepository
     {
+
+        IGeneralRepository<T> GetRepository<T>() where T : class;
+
         IAccountUserBudgetRepository AccountUserBudgetRepository { get; }
 
-        IAccountUserFinancialGoalsRepository AccountUserFinancialGoals { get; }
+        IAccountUserFinancialGoalsRepository AccountUserFinancialGoalsRepository { get; }
 
         IBudgetRepository BudgetRepository { get; }
 

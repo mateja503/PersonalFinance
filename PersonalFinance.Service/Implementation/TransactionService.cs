@@ -1,4 +1,7 @@
-﻿using PersonalFinance.Repository.UnifOfWorkRepository;
+﻿using PersonalFinance.Domain.Models;
+using PersonalFinance.Repository.General;
+using PersonalFinance.Repository.UnifOfWorkRepository;
+using PersonalFinance.Service.General;
 using PersonalFinance.Service.Interface;
 using System;
 using System.Collections.Generic;
@@ -8,9 +11,14 @@ using System.Threading.Tasks;
 
 namespace PersonalFinance.Service.Implementation
 {
-    public class TransactionService(IUnitOfWorkRepository unitOfWork) : ITransactionService
+    public class TransactionService : GeneralService<Transaction>, ITransactionService
     {
-        private readonly IUnitOfWorkRepository _unitOfWork = unitOfWork;
+        private readonly IGeneralRepository<Transaction> _repository;
+
+        public TransactionService(IUnitOfWorkRepository unitOfWork) : base(unitOfWork)
+        {
+            _repository = unitOfWork.GetRepository<Transaction>();
+        }
 
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PersonalFinance.Domain.Models;
+using PersonalFinance.Service.General;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,20 @@ using System.Threading.Tasks;
 
 namespace PersonalFinance.Service.Interface
 {
-    public interface IBudgetService
+    public interface IBudgetService: IGeneralService<Budget>
     {
+        public Task<double> GetTheBudgetAmmountForMonthInEveryYear(int month);
+
+        public Task<double> GetTheBudgetForTheWholeYear(int year);
+        public Task<double> GetTheBudgetForMonthInYear(int year,int month);
+
+        public Task<Budget> TakeOutOfTheBudget(Budget budget, double amount);
+
+        public Task<Budget> AddToTheBudget(Budget budget, double amount);
+
+        public Task<bool> OverTheBudget(Budget budget);
+
+        public Task<double> GetTheBudgetAmount(Budget budget);
+
     }
 }
