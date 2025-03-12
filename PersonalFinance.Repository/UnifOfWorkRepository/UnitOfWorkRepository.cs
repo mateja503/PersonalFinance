@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PersonalFinance.Repository.UnifOfWorkRepository
 {
-    public class UnitOfWorkRepositor: IUnitOfWorkRepository
+    public class UnitOfWorkRepository: IUnitOfWorkRepository
     {
 
         private readonly ApplicationDbContext _db;
@@ -33,7 +33,7 @@ namespace PersonalFinance.Repository.UnifOfWorkRepository
 
         public ITransactionRepository TransactionRepository { get; private set; }
 
-        public UnitOfWorkRepositor(ApplicationDbContext db)
+        public UnitOfWorkRepository(ApplicationDbContext db)
         {
             _db = db;
             AccountUserBudgetRepository = new AccountUserBudgetRepository(_db);

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PersonalFinance.Repository.UnifOfWorkRepository
 {
-    interface IUnitOfWorkRepository
+    public interface IUnitOfWorkRepository
     {
         IAccountUserBudgetRepository AccountUserBudgetRepository { get; }
 
