@@ -23,7 +23,11 @@
 
   <ItemGroup>
     <Folder Include="General\" />
-    <Folder Include="UnitOfWorkService\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PersonalFinance.Domain\PersonalFinance.Domain.csproj" />
+    <ProjectReference Include="..\PersonalFinance.Repository\PersonalFinance.Repository.csproj" />
   </ItemGroup>
 
 </Project>

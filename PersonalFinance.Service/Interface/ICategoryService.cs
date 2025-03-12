@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PersonalFinance.Service.Interface
 {
-    interface ICategoryService
+    public interface ICategoryService
     {
     }
 }

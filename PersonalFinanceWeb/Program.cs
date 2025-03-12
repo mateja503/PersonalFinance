@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PersonalFinance.Domain.Identity;
 using PersonalFinance.Repository.Data;
 using PersonalFinance.Repository.UnifOfWorkRepository;
+using PersonalFinance.Service.UnitOfWorkService;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -21,6 +22,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //    .AddDefaultTokenProviders();
 
 builder.Services.AddTransient<IUnitOfWorkRepository, UnitOfWorkRepository>();
+builder.Services.AddTransient<IUnitOfWorkService, UnitOfWorkService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
