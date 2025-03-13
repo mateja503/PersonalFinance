@@ -23,5 +23,7 @@ namespace PersonalFinance.Service.Interface
 
         public Task<double> GetTheBudgetAmount(int Id);
 
+        public Task<Budget> Update(int Id, Budget budget);
+
     }
 }

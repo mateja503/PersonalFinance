@@ -1,9 +1,11 @@
 ﻿using PersonalFinance.Domain.Models;
 using PersonalFinance.Repository.General;
+using PersonalFinance.Repository.Implementation;
 using PersonalFinance.Repository.Interface;
 using PersonalFinance.Repository.UnifOfWorkRepository;
 using PersonalFinance.Service.General;
 using PersonalFinance.Service.Interface;
+using System.Runtime.InteropServices;
 
 
 namespace PersonalFinance.Service.Implementation
@@ -88,6 +90,15 @@ namespace PersonalFinance.Service.Implementation
             _repository.Detach();
             return result ?? 0;
 
+        }
+
+        public async Task<Budget> Update(int Id, Budget budget)
+        {
+            var obj = await  _repository.Get(u => u.Id == Id);
+
+            obj.
+
+            return await ((BudgetRepository)_repository).Update()
         }
     }
 }

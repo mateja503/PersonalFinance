@@ -12,6 +12,7 @@ namespace PersonalFinance.Service.Interface
     public interface IAccountUserBudgetService : IGeneralService<AccountUserBudget>
     {
 
+       
 
     }
 }

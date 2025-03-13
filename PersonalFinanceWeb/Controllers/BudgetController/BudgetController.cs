@@ -24,21 +24,24 @@ namespace PersonalFinanceWeb.Controllers.BudgetController
 
         // GET api/<BudgetController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<Budget> Get(int id)
         {
-            return "value";
+            return await _unitOfWorkService.BudgetService.Get(u => u.Id == id);
         }
 
         // POST api/<BudgetController>
         [HttpPost]
-        public void Post([FromBody]string value)
+        public async Task<Budget> Post(Budget budget)
         {
+            return await _unitOfWorkService.BudgetService.Add(budget);
         }
 
         // PUT api/<BudgetController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public async Task<Budget> Put(int id,Budget budget)
         {
+            return await _unitOfWorkService.BudgetService.Update(id, budget);
+
         }
 
         // DELETE api/<BudgetController>/5
