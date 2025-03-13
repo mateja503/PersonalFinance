@@ -13,7 +13,7 @@ namespace PersonalFinance.Domain.Models
 
         public virtual AccountUser? AccountUser { get; set; }
 
-        public string AccountUserId { get; set; }
+        public int AccountUserId { get; set; }
 
         public virtual FinancialGoals? FinancialGoals { get; set; }
 

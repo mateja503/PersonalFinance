@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using PersonalFinance.Domain.Identity.RoleManager;
 using PersonalFinance.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -8,12 +8,19 @@ using System.Threading.Tasks;
 
 namespace PersonalFinance.Domain.Identity
 {
-    public class AccountUser: IdentityUser
+    public class AccountUser
     {
-        public string Token;
-        //to finish up 
+        public int Id;
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string email { get; set; }
 
+        public double amount { get; set; }
+
+        public virtual List<AccountUserRole> Roles { get; set; }
         public virtual List<AccountUserFinancialGoals?> AccontUserFinancialGoalList { get; set; }
+
+
 
         public virtual List<AccountUserBudget?> AccountUserBudgetList { get; set; }
     }

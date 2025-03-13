@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using PersonalFinance.Domain.Identity;
+using PersonalFinance.Domain.Identity.RoleManager;
+using PersonalFinance.Domain.Identity.RoleManager.Enumiration;
 using PersonalFinance.Domain.Models;
 using PersonalFinance.Repository.Configuration;
 using System;
@@ -12,12 +14,15 @@ using System.Threading.Tasks;
 
 namespace PersonalFinance.Repository.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<AccountUser>
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options) 
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-        {
+        
 
-        }
+        public DbSet<AccountUser> AccountUsers { get; set; }
+
+        public DbSet<Role> Roles { get; set; }
+
+        public DbSet<AccountUserRole> AccountUserRoles { get; set; }
         public DbSet<AccountUserBudget> AccountUserBudgets { get; set; }
         public DbSet<AccountUserFinancialGoals> AccountUserFinancialGoals { get; set; }
         public DbSet<Budget> Budgets { get; set; }
@@ -48,6 +53,10 @@ namespace PersonalFinance.Repository.Data
             new AccountUserBudgetConfiguration().Configure(modelbuilder.Entity<AccountUserBudget>());
             new AccountUserFinancialGoalsConfiguration().Configure(modelbuilder.Entity<AccountUserFinancialGoals>());
             new TransactionNotesConfiguration().Configure(modelbuilder.Entity<TransactionNotes>());
+            
+            new AccountUserConfiguration().Configure(modelbuilder.Entity<AccountUser>());
+            new RoleConfiguration().Configure(modelbuilder.Entity<Role>());
+            new AccountUserRoleConfiguration().Configure(modelbuilder.Entity<AccountUserRole>());
 
             modelbuilder.Entity<Budget>().HasData(
                     new Budget
