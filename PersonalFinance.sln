@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinance.Service", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonalFinance.Repository", "PersonalFinance.Repository\PersonalFinance.Repository.csproj", "{7BCBCD3B-ED2A-4D82-8AA6-69C9CA35230C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{EF2A44BA-5931-4E4D-ABB8-4137558C4133}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{7BCBCD3B-ED2A-4D82-8AA6-69C9CA35230C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BCBCD3B-ED2A-4D82-8AA6-69C9CA35230C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BCBCD3B-ED2A-4D82-8AA6-69C9CA35230C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF2A44BA-5931-4E4D-ABB8-4137558C4133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF2A44BA-5931-4E4D-ABB8-4137558C4133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF2A44BA-5931-4E4D-ABB8-4137558C4133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF2A44BA-5931-4E4D-ABB8-4137558C4133}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

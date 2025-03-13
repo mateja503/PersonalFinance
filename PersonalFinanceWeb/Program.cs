@@ -4,6 +4,7 @@ using PersonalFinance.Domain.Identity;
 using PersonalFinance.Repository.Data;
 using PersonalFinance.Repository.UnifOfWorkRepository;
 using PersonalFinance.Service.UnitOfWorkService;
+using Shared.Configuration.Setup.Security;
 using System;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,6 +24,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddTransient<IUnitOfWorkRepository, UnitOfWorkRepository>();
 builder.Services.AddTransient<IUnitOfWorkService, UnitOfWorkService>();
+
+
+//builder.Services.ConfigureOptions<JwtOptionsSetup>();//added for Jwt
+//builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();//adde for Jwt
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

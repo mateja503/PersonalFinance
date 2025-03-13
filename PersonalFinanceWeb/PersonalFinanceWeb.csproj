@@ -26,6 +26,7 @@
     <ProjectReference Include="..\PersonalFinance.Domain\PersonalFinance.Domain.csproj" />
     <ProjectReference Include="..\PersonalFinance.Repository\PersonalFinance.Repository.csproj" />
     <ProjectReference Include="..\PersonalFinance.Service\PersonalFinance.Service.csproj" />
+    <ProjectReference Include="..\Shared\Shared.csproj" />
   </ItemGroup>
 
 </Project>
