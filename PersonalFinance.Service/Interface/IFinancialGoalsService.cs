@@ -10,7 +10,7 @@ namespace PersonalFinance.Service.Interface
 {
     public interface IFinancialGoalsService : IGeneralService<FinancialGoals>
     {
-
+        public Task<bool> CheckGoalReached(int Id, double amount, int year, int month); 
 
     }
 }

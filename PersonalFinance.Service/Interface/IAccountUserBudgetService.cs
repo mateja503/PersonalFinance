@@ -12,7 +12,6 @@ namespace PersonalFinance.Service.Interface
     public interface IAccountUserBudgetService : IGeneralService<AccountUserBudget>
     {
 
-        public  Task<bool> CheckUserForBudgetExceeded(AccountUserBudget accountUserBudget, double amount);
 
     }
 }

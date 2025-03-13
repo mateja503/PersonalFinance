@@ -15,13 +15,13 @@ namespace PersonalFinance.Service.Interface
         public Task<double> GetTheBudgetForTheWholeYear(int year);
         public Task<double> GetTheBudgetForMonthInYear(int year,int month);
 
-        public Task<Budget> TakeOutOfTheBudget(Budget budget, double amount);
+        public Task<Budget> TakeOutOfTheBudget(int Id, double amount);
 
-        public Task<Budget> AddToTheBudget(Budget budget, double amount);
+        public Task<Budget> AddToTheBudget(int Id, double amount);
 
-        public Task<bool> OverTheBudget(Budget budget);
+        public Task<bool> OverTheBudget(int Id);
 
-        public Task<double> GetTheBudgetAmount(Budget budget);
+        public Task<double> GetTheBudgetAmount(int Id);
 
     }
 }

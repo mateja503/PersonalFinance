@@ -44,9 +44,9 @@ namespace PersonalFinance.Service.Implementation
             return result;
         }
 
-        public async Task<Budget> TakeOutOfTheBudget(Budget budget, double amount)
+        public async Task<Budget> TakeOutOfTheBudget(int Id, double amount)
         {
-            var obj = await _repository.Get(u => u.Id == budget.Id);
+            var obj = await _repository.Get(u => u.Id == Id);
             obj.budgetAmount = obj.budgetAmount - amount;
 
             var result =  await ((IBudgetRepository)_repository).Update(obj);
@@ -57,9 +57,9 @@ namespace PersonalFinance.Service.Implementation
 
         }
 
-        public async Task<Budget> AddToTheBudget(Budget budget, double amount)
+        public async Task<Budget> AddToTheBudget(int Id, double amount)
         {
-            var obj = await _repository.Get(u => u.Id == budget.Id);
+            var obj = await _repository.Get(u => u.Id == Id);
             obj.budgetAmount = obj.budgetAmount + amount;
 
             var result = await((IBudgetRepository)_repository).Update(obj);
@@ -69,9 +69,9 @@ namespace PersonalFinance.Service.Implementation
             return result;
         }
 
-        public async Task<bool> OverTheBudget(Budget budget)
+        public async Task<bool> OverTheBudget(int Id)
         {
-            var obj = await _repository.Get(u => u.Id == budget.Id);
+            var obj = await _repository.Get(u => u.Id == Id);
             var result = obj.budgetAmount < 0;
 
             _repository.Detach();
@@ -79,10 +79,10 @@ namespace PersonalFinance.Service.Implementation
             return result;
         }
 
-        public async Task<double> GetTheBudgetAmount(Budget budget)
+        public async Task<double> GetTheBudgetAmount(int Id)
         {
 
-            var obj = await _repository.Get(u => u.Id == budget.Id);
+            var obj = await _repository.Get(u => u.Id == Id);
             var result = obj.budgetAmount;
 
             _repository.Detach();

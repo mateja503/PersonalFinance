@@ -11,7 +11,6 @@ namespace PersonalFinance.Service.Interface
     public interface IAccountUserFinancialGoalsService: IGeneralService<AccountUserFinancialGoals>
     {
 
-        public Task<bool> CheckFinancialGoalReached(AccountUserFinancialGoals accountUserFinancialGoals, double amount);
 
 
     }

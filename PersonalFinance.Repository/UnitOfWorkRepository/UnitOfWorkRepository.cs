@@ -1,5 +1,6 @@
 ﻿using PersonalFinance.Domain.Models;
 using PersonalFinance.Repository.Data;
+using PersonalFinance.Repository.General;
 using PersonalFinance.Repository.Implementation;
 using PersonalFinance.Repository.Interface;
 using System;
@@ -19,8 +20,6 @@ namespace PersonalFinance.Repository.UnifOfWorkRepository
 
         public IAccountUserBudgetRepository AccountUserBudgetRepository { get; private set; }
 
-        public IAccountUserFinancialGoalsRepository AccountUserFinancialGoals { get; private set; }
-
         public IBudgetRepository BudgetRepository { get; private set; }
 
         public ICategoryRepository CategoryRepository { get; private set; }
@@ -33,11 +32,13 @@ namespace PersonalFinance.Repository.UnifOfWorkRepository
 
         public ITransactionRepository TransactionRepository { get; private set; }
 
+        public IAccountUserFinancialGoalsRepository AccountUserFinancialGoalsRepository { get; private set; }
+
         public UnitOfWorkRepository(ApplicationDbContext db)
         {
             _db = db;
             AccountUserBudgetRepository = new AccountUserBudgetRepository(_db);
-            AccountUserFinancialGoals = new AccountUserFinancialGoalsRepository(_db);
+            AccountUserFinancialGoalsRepository = new AccountUserFinancialGoalsRepository(_db);
             BudgetRepository = new BudgetRepository(_db);
             CategoryRepository = new CategoryRepository(_db);
             FinancialGoalsRepository = new FinancialGoalsRepository(_db);
@@ -48,6 +49,11 @@ namespace PersonalFinance.Repository.UnifOfWorkRepository
 
 
 
+        }
+
+        public IGeneralRepository<T> GetRepository<T>() where T : class
+        {
+            throw new NotImplementedException();
         }
     }
 }

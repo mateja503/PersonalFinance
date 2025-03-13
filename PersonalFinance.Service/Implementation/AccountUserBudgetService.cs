@@ -22,16 +22,7 @@ namespace PersonalFinance.Service.Implementation
             _repository =  unitOfWork.GetRepository<AccountUserBudget>();
         }
 
-        public async Task<bool> CheckUserForBudgetExceeded(AccountUserBudget accountUserBudget, double amount)
-        {
-            var obj = await _repository.Get(u => u.Id == accountUserBudget.Id);
-
-            bool flag = amount > obj?.Budget?.budgetAmount ? true : false;
-
-            _repository.Detach();
-
-            return flag;
-        }
+    
 
   
     }

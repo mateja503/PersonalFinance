@@ -19,5 +19,14 @@ namespace PersonalFinance.Service.Implementation
         {
             _repository = unitOfWork.GetRepository<FinancialGoals>();
         }
+
+        public async Task<bool> CheckGoalReached(int Id, double amount,int year, int month)
+        {
+            var obj = await _repository.Get(u => u.Id == Id);
+            var result = amount >= obj?.amountGoal && DateTime.UtcNow.Year <= year && DateTime.UtcNow.Month <= month;
+
+            _repository.Detach();
+            return result;
+        }
     }
 }
