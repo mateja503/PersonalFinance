@@ -15,9 +15,7 @@ namespace PersonalFinance.Repository.UnifOfWorkRepository
     {
 
         private readonly ApplicationDbContext _db;
-
         
-
         public IAccountUserBudgetRepository AccountUserBudgetRepository { get; private set; }
 
         public IBudgetRepository BudgetRepository { get; private set; }
@@ -53,7 +51,25 @@ namespace PersonalFinance.Repository.UnifOfWorkRepository
 
         public IGeneralRepository<T> GetRepository<T>() where T : class
         {
-            throw new NotImplementedException();
+            if (typeof(T) == typeof(AccountUserBudget))
+                return (IGeneralRepository<T>)AccountUserBudgetRepository;
+            if (typeof(T) == typeof(Budget))
+                return (IGeneralRepository<T>)BudgetRepository;
+            if (typeof(T) == typeof(Category))
+                return (IGeneralRepository<T>)CategoryRepository;
+            if (typeof(T) == typeof(FinancialGoals))
+                return (IGeneralRepository<T>)FinancialGoalsRepository;
+            if (typeof(T) == typeof(Note))
+                return (IGeneralRepository<T>)NoteRepository;
+            if (typeof(T) == typeof(TransactionNotes))
+                return (IGeneralRepository<T>)TransactionNotesRepository;
+            if (typeof(T) == typeof(Transaction))
+                return (IGeneralRepository<T>)TransactionRepository;
+            if (typeof(T) == typeof(AccountUserFinancialGoals))
+                return (IGeneralRepository<T>)AccountUserFinancialGoalsRepository;
+
+            throw new NotImplementedException($"No repository found for type {typeof(T).Name}");
         }
+
     }
 }

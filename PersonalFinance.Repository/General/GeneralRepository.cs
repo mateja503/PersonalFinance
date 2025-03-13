@@ -2,6 +2,7 @@
 using PersonalFinance.Repository.Data;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -17,19 +18,33 @@ namespace PersonalFinance.Repository.General
         {
            IQueryable<T> query = _db.Set<T>();
             query = query.Where(filter);
-            return await query.SingleOrDefaultAsync();
+            var result = await query.SingleOrDefaultAsync();
+            Detach();
+            return result;
         }
 
         public async Task<List<T>> GetAll(Expression<Func<T, bool>>? filter = null)
         {
-            IQueryable<T> query = _db.Set<T>();
-            if (filter == null)
+            try
             {
-                return await query.ToListAsync(); 
-            }
+                IQueryable<T> query = _db.Set<T>();
+                if (filter == null)
+                {
+                    var result = await query.ToListAsync();
+                    Detach();
+                    return result;
+                }
 
-            query = query.Where(filter);
-            return await query.ToListAsync();
+                query = query.Where(filter);
+                Detach();
+                return await query.ToListAsync();
+            }
+            catch (Exception e) 
+            {
+                Console.WriteLine(e.Message);
+                return [];
+            }
+            
         }
         public async Task<T> Add(T entity)
         {

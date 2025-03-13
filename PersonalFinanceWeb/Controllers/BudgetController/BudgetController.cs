@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PersonalFinance.Domain.Models;
+using PersonalFinance.Service.General;
 using PersonalFinance.Service.Interface;
+using PersonalFinance.Service.UnitOfWorkService;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,16 +10,16 @@ namespace PersonalFinanceWeb.Controllers.BudgetController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BudgetController(IBudgetService service) : ControllerBase
+    public class BudgetController(IUnitOfWorkService unitOfWork): ControllerBase
     {
 
-        private readonly IBudgetService _service = service;
+        private readonly IUnitOfWorkService _unitOfWorkService = unitOfWork;
 
-        // GET: api/<BudgetController>/all
-        [HttpGet("all")]
-        public Task<List<Budget>> GetAll()
+        // GET: api/<BudgetController>
+        [HttpGet]
+        public async Task<List<Budget>> Get()
         {
-            return null;
+            return await _unitOfWorkService.BudgetService.GetAll(); 
         }
 
         // GET api/<BudgetController>/5
