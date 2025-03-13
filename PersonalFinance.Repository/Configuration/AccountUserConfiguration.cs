@@ -30,6 +30,16 @@ namespace PersonalFinance.Repository.Configuration
             builder.Property(u => u.amount)
                 .HasColumnType("decimal(18,2)");
 
+            builder.OwnsOne(u => u.UserAuthentication, a => 
+            {
+                //a.ToTable("Authentication");//i want to be in the same table as the AccountUser
+                a.WithOwner().HasForeignKey(p => p.AccountUserId);
+                a.Property(p => p.au_username).HasMaxLength(128);
+                a.Property(p => p.au_password_has).HasMaxLength(500);
+                a.Property(p => p.au_password_salt).HasMaxLength(500);
+                a.Property(p => p.Token).HasMaxLength(500);
+                
+            });
 
 
 

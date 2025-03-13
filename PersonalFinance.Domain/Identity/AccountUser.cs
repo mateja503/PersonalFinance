@@ -20,7 +20,7 @@ namespace PersonalFinance.Domain.Identity
         public virtual List<AccountUserRole> Roles { get; set; }
         public virtual List<AccountUserFinancialGoals?> AccontUserFinancialGoalList { get; set; }
 
-
+        public virtual Auth UserAuthentication { get; set; }
 
         public virtual List<AccountUserBudget?> AccountUserBudgetList { get; set; }
     }

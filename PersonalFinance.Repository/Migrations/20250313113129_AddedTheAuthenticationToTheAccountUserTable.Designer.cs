@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PersonalFinance.Repository.Data;
 
@@ -11,9 +12,11 @@ using PersonalFinance.Repository.Data;
 namespace PersonalFinance.Repository.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250313113129_AddedTheAuthenticationToTheAccountUserTable")]
+    partial class AddedTheAuthenticationToTheAccountUserTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -356,7 +359,7 @@ namespace PersonalFinance.Repository.Migrations
                 {
                     b.OwnsOne("PersonalFinance.Domain.Identity.Auth", "UserAuthentication", b1 =>
                         {
-                            b1.Property<int>("AccountUserId")
+                            b1.Property<int>("AccounUserId")
                                 .HasColumnType("int");
 
                             b1.Property<string>("Token")
@@ -379,12 +382,12 @@ namespace PersonalFinance.Repository.Migrations
                                 .HasMaxLength(128)
                                 .HasColumnType("nvarchar(128)");
 
-                            b1.HasKey("AccountUserId");
+                            b1.HasKey("AccounUserId");
 
-                            b1.ToTable("AccountUsers");
+                            b1.ToTable("Authentication", (string)null);
 
                             b1.WithOwner()
-                                .HasForeignKey("AccountUserId");
+                                .HasForeignKey("AccounUserId");
                         });
 
                     b.Navigation("UserAuthentication")
