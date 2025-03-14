@@ -96,9 +96,11 @@ namespace PersonalFinance.Service.Implementation
         {
             var obj = await  _repository.Get(u => u.Id == Id);
 
-            obj.
+            obj.budgetAmount = budget.budgetAmount;
+            obj.BudgetMonth = budget.BudgetMonth;
+            obj.AccountUserBudgetList = budget.AccountUserBudgetList;
 
-            return await ((BudgetRepository)_repository).Update()
+            return await ((BudgetRepository)_repository).Update(obj);
         }
     }
 }

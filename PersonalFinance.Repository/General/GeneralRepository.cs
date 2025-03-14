@@ -52,11 +52,15 @@ namespace PersonalFinance.Repository.General
             await _db.SaveChangesAsync();
             return entity;
         }
-        public async Task<T> Delete(T entity)
+        public async Task<T> Delete(Expression<Func<T, bool>> filter)
         {
-             _db.Set<T>().Remove(entity);
+            IQueryable<T> query = _db.Set<T>();
+            query = query.Where(filter);
+            var result = await query.SingleOrDefaultAsync();
+            Detach();
+            _db.Set<T>().Remove(result);
             await _db.SaveChangesAsync();
-            return entity;
+            return result;
         }
 
         public async Task<List<T>> DeleteRange(IEnumerable<T> enteties)

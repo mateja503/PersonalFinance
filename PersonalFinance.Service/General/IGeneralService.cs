@@ -17,7 +17,7 @@ namespace PersonalFinance.Service.General
         public Task<T> Add(T entity);
 
 
-        public Task<T> Delete(T entity);
+        public Task<T> Delete(Expression<Func<T, bool>> filter);
 
         public Task<List<T>> DeleteRange(IEnumerable<T> enteties);
 

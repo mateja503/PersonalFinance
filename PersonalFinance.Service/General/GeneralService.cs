@@ -29,9 +29,9 @@ namespace PersonalFinance.Service.General
             return await _repository.Add(entity);
         }
 
-        public async Task<T> Delete(T entity)
+        public async Task<T> Delete(Expression<Func<T, bool>> filter)
         {
-            return await _repository.Delete(entity);
+            return await _repository.Delete(filter);
         }
 
         public async Task<List<T>> DeleteRange(IEnumerable<T> enteties)

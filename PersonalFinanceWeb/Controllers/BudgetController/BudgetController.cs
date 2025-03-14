@@ -3,6 +3,8 @@ using PersonalFinance.Domain.Models;
 using PersonalFinance.Service.General;
 using PersonalFinance.Service.Interface;
 using PersonalFinance.Service.UnitOfWorkService;
+using System.Reflection.Metadata.Ecma335;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -46,8 +48,9 @@ namespace PersonalFinanceWeb.Controllers.BudgetController
 
         // DELETE api/<BudgetController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<Budget> Delete(int Id)
         {
+            return await _unitOfWorkService.BudgetService.Delete(u=>u.Id == Id);
         }
     }
 }
