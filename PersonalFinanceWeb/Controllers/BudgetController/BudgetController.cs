@@ -18,8 +18,8 @@ namespace PersonalFinanceWeb.Controllers.BudgetController
         private readonly IUnitOfWorkService _unitOfWorkService = unitOfWork;
 
         // GET: api/<BudgetController>
-        [HttpGet]
-        public async Task<List<Budget>> Get()
+        [HttpGet("all")]
+        public async Task<List<Budget>> GetAll()
         {
             return await _unitOfWorkService.BudgetService.GetAll(); 
         }

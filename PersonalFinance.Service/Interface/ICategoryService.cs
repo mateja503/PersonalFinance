@@ -10,5 +10,6 @@ namespace PersonalFinance.Service.Interface
 {
     public interface ICategoryService : IGeneralService<Category>
     {
+        public Task<Category> Update(int Id, Category category);
     }
 }
