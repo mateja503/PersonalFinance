@@ -1,5 +1,6 @@
 ﻿using PersonalFinance.Domain.Models;
 using PersonalFinance.Repository.General;
+using PersonalFinance.Repository.Implementation;
 using PersonalFinance.Repository.UnifOfWorkRepository;
 using PersonalFinance.Service.General;
 using PersonalFinance.Service.Interface;
@@ -27,6 +28,19 @@ namespace PersonalFinance.Service.Implementation
 
             _repository.Detach();
             return result;
+        }
+
+        public async Task<FinancialGoals> Update(int Id, FinancialGoals financialGoals)
+        {
+            var obj = await _repository.Get(u => u.Id == Id);
+
+            obj.goalText = financialGoals.goalText;
+            obj.amountGoal = financialGoals.amountGoal;
+            obj.goalReachInTime = financialGoals.goalReachInTime;
+            obj.AccountUserFinancialGoalList = financialGoals.AccountUserFinancialGoalList;
+
+            return await ((FinancialGoalsRepository)_repository).Update(obj);
+
         }
     }
 }
