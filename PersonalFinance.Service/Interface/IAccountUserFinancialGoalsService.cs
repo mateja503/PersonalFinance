@@ -11,7 +11,7 @@ namespace PersonalFinance.Service.Interface
     public interface IAccountUserFinancialGoalsService: IGeneralService<AccountUserFinancialGoals>
     {
 
-
+        public Task<AccountUserFinancialGoals> Update(int Id, AccountUserFinancialGoals accountUserFinancialGoals);
 
     }
 }
