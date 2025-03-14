@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using PersonalFinance.Domain.Identity;
 using PersonalFinance.Domain.Identity.RoleManager;
 using PersonalFinance.Domain.Identity.RoleManager.Enumiration;
+using PersonalFinance.Domain.UserRegistryModel;
 using PersonalFinance.Repository.General;
 using PersonalFinance.Repository.Implementation;
 using PersonalFinance.Repository.UnifOfWorkRepository;
@@ -27,8 +28,10 @@ namespace PersonalFinance.Service.IdentityService
             _provider = provider;
         }
 
-        public async Task<AccountUser> Login(string username, string password)
+        public async Task<AccountUser> Login(AccountUser accountUser)
         {
+            string username = accountUser.UserAuthentication.au_username;
+            string password = accountUser.UserAuthentication.au_password;
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
                 throw new FormNotCompletelyEnteredException();
@@ -56,8 +59,13 @@ namespace PersonalFinance.Service.IdentityService
 
         }
 
-        public async Task<AccountUser> Register(string username, string email, string password, string name, string surname)
+        public async Task<AccountUser> Register(AccoutUserRegistryModel model)
         {
+            string? username = model.username;
+            string? email = model.email;
+            string? password = model.password;
+            string? name = model.name;
+            string? surname = model.surname;
             if (string.IsNullOrEmpty(username) ||
                 string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password) ||
                 string.IsNullOrEmpty(name) || string.IsNullOrEmpty(surname)) 

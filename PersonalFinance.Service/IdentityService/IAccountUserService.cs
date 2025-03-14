@@ -1,4 +1,5 @@
 ﻿using PersonalFinance.Domain.Identity;
+using PersonalFinance.Domain.UserRegistryModel;
 using PersonalFinance.Service.General;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace PersonalFinance.Service.IdentityService
 {
     public interface IAccountUserService : IGeneralService<AccountUser>
     {
-        public Task<AccountUser> Login(string username, string password);
-        public Task<AccountUser> Register(string username, string email, string password, string name, string surname);
+        public Task<AccountUser> Login(AccountUser accountUser);
+        public Task<AccountUser> Register(AccoutUserRegistryModel model );
     }
 }
