@@ -1,83 +1,52 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using PersonalFinance.Domain.Models;
+using PersonalFinance.Service.UnitOfWorkService;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace PersonalFinanceWeb.Controllers.NoteController
 {
-    public class NoteController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class NoteController(IUnitOfWorkService unitOfWork) : ControllerBase
     {
-        // GET: NoteController
-        public ActionResult Index()
+        private readonly IUnitOfWorkService _unitOfWorkService = unitOfWork;
+        // GET: api/<NoteController>
+        [HttpGet("all")]
+        public async Task<List<Note>> GetAll()
         {
-            return View();
+            return await _unitOfWorkService.NoteService.GetAll();
         }
 
-        // GET: NoteController/Details/5
-        public ActionResult Details(int id)
+        // GET api/<NoteController>/5
+        [HttpGet("{id}")]
+        public async Task<Note> Get(int Id)
         {
-            return View();
+            return await _unitOfWorkService.NoteService.Get(u=>u.Id == Id);
         }
 
-        // GET: NoteController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: NoteController/Create
+        // POST api/<NoteController>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<Note> Post(Note note)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return await _unitOfWorkService.NoteService.Add(note);
+
         }
 
-        // GET: NoteController/Edit/5
-        public ActionResult Edit(int id)
+        // PUT api/<NoteController>/5
+        [HttpPut("{id}")]
+        public async Task<Note> Put(int Id, Note note)
         {
-            return View();
+            return await _unitOfWorkService.NoteService.Update(Id,note);
+
         }
 
-        // POST: NoteController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        // DELETE api/<NoteController>/5
+        [HttpDelete("{id}")]
+        public async Task<Note> Delete(int Id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            return await _unitOfWorkService.NoteService.Delete(u=>u.Id == Id);
 
-        // GET: NoteController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: NoteController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

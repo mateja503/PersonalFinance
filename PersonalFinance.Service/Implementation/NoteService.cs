@@ -1,5 +1,6 @@
 ﻿using PersonalFinance.Domain.Models;
 using PersonalFinance.Repository.General;
+using PersonalFinance.Repository.Implementation;
 using PersonalFinance.Repository.UnifOfWorkRepository;
 using PersonalFinance.Service.General;
 using PersonalFinance.Service.Interface;
@@ -18,6 +19,16 @@ namespace PersonalFinance.Service.Implementation
         public NoteService(IUnitOfWorkRepository unitOfWork) : base(unitOfWork)
         {
             _repository = unitOfWork.GetRepository<Note>();
+        }
+
+        public async Task<Note> Update(int Id, Note note)
+        {
+            var obj = await _repository.Get(u => u.Id == Id);
+
+            obj.Text = note.Text;
+            obj.TransactionNoteList = note.TransactionNoteList;
+
+            return await ((NoteRepository)_repository).Update(obj);
         }
     }
 }
