@@ -12,7 +12,9 @@ namespace PersonalFinance.Service.Interface
     public interface IAccountUserBudgetService : IGeneralService<AccountUserBudget>
     {
 
-       
+        public Task<AccountUserBudget> Update(int Id, AccountUserBudget accountUserBudget);
+
+
 
     }
 }
