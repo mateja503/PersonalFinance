@@ -16,7 +16,7 @@ namespace PersonalFinance.Domain.Identity
         public string au_username { get; set; }
 
         [JsonIgnore]
-        public string au_password_has { get; set; }
+        public string au_password { get; set; }
 
         [JsonIgnore]
         public string au_password_salt { get; set; }

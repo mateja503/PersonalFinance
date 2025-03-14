@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace PersonalFinance.Service.IdentityService.RoleService
 {
-    public interface IRoleService
+    public interface IRoleService : IGeneralService<Role>
     {
-        //TODO:
+        public Task<Role> Update(int Id, Role role);
     }
 }

@@ -10,7 +10,7 @@ namespace PersonalFinance.Service.IdentityService
 {
     public interface IAccountUserService : IGeneralService<AccountUser>
     {
-
-        //TODO: 
+        public Task<AccountUser> Login(string username, string password);
+        public Task<AccountUser> Register(string username, string email, string password, string name, string surname);
     }
 }
