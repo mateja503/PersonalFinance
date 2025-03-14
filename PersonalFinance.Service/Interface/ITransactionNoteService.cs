@@ -10,5 +10,6 @@ namespace PersonalFinance.Service.Interface
 {
     public interface ITransactionNoteService: IGeneralService<TransactionNotes>
     {
+        public Task<TransactionNotes> Update(int Id, TransactionNotes transactionNotes);
     }
 }
