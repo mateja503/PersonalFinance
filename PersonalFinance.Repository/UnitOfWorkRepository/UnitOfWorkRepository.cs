@@ -1,10 +1,13 @@
-﻿using PersonalFinance.Domain.Identity;
+﻿using Microsoft.Extensions.Options;
+using PersonalFinance.Domain.Identity;
 using PersonalFinance.Domain.Identity.RoleManager;
 using PersonalFinance.Domain.Models;
 using PersonalFinance.Repository.Data;
 using PersonalFinance.Repository.General;
 using PersonalFinance.Repository.Implementation;
 using PersonalFinance.Repository.Interface;
+using Shared.Configuration.Options;
+using Shared.Configuration.Setup.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +43,7 @@ namespace PersonalFinance.Repository.UnifOfWorkRepository
 
         public IAccountUserRoleRepository AccountUserRoleRepository { get; private set; }
 
+    
         public UnitOfWorkRepository(ApplicationDbContext db)
         {
             _db = db;

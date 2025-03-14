@@ -18,8 +18,8 @@ namespace PersonalFinance.Domain.Identity
         [JsonIgnore]
         public string au_password { get; set; }
 
-        [JsonIgnore]
-        public string au_password_salt { get; set; }
+        //[JsonIgnore]
+        //public string au_password_salt { get; set; }
 
         public string Token { get; set; }
 

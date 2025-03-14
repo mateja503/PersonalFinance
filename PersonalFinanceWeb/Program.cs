@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PersonalFinance.Domain.Identity;
@@ -30,9 +31,16 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //    .AddEntityFrameworkStores<ApplicationDbContext>()
 //    .AddDefaultTokenProviders();
 
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
+
 builder.Services.AddTransient<IUnitOfWorkRepository, UnitOfWorkRepository>();
 builder.Services.AddTransient<IUnitOfWorkService, UnitOfWorkService>();
+builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
+builder.Services.ConfigureOptions<JwtOptionsSetup>();
 builder.Services.AddTransient<JWTProvider>();
+
+
 
 
 //builder.Services.ConfigureOptions<JwtOptionsSetup>();//added for Jwt

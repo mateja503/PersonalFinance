@@ -36,7 +36,6 @@ namespace PersonalFinance.Repository.Configuration
                 a.WithOwner().HasForeignKey(p => p.AccountUserId);
                 a.Property(p => p.au_username).HasMaxLength(128);
                 a.Property(p => p.au_password).HasMaxLength(500);
-                a.Property(p => p.au_password_salt).HasMaxLength(500);
                 a.Property(p => p.Token).HasMaxLength(500);
                 
             });

@@ -3,6 +3,7 @@ using PersonalFinance.Service.IdentityService;
 using PersonalFinance.Service.IdentityService.RoleService;
 using PersonalFinance.Service.Implementation;
 using PersonalFinance.Service.Interface;
+using Shared.Configuration.Setup.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,8 @@ namespace PersonalFinance.Service.UnitOfWorkService
 
         public IAccountUserRoleService AccountUserRoleService { get; private set; }
 
-        public UnitOfWorkService(IUnitOfWorkRepository unitOfWork)
+
+        public UnitOfWorkService(IUnitOfWorkRepository unitOfWork,JWTProvider _provider)
         {
             _unitOfWork = unitOfWork;
             AccountUserBudgetService = new AccountUserBudgetService(_unitOfWork);
@@ -50,7 +52,7 @@ namespace PersonalFinance.Service.UnitOfWorkService
             NoteService = new NoteService(_unitOfWork);
             TransactionNoteService = new TransactionNoteService(_unitOfWork);
             TransactionService = new TransactionService(_unitOfWork);
-            AccountUserService = new AccountUserService(_unitOfWork);
+            AccountUserService = new AccountUserService(_unitOfWork,_provider);
             RoleService = new RoleService(_unitOfWork);
             AccountUserRoleService = new AccountUserRoleService(_unitOfWork);
 

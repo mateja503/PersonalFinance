@@ -21,13 +21,13 @@ namespace PersonalFinance.Service.IdentityService
         
         private readonly JWTProvider? _provider;
 
-        public AccountUserService(IUnitOfWorkRepository unitOfWork) : base(unitOfWork)
-        {
-            _repositoryUser = unitOfWork.GetRepository<AccountUser>();
-            _repositoryRole = unitOfWork.GetRepository<Role>();
-            _repositoryAccountUserRole = unitOfWork.GetRepository<AccountUserRole>();
-            _provider = null;
-        }
+        //public AccountUserService(IUnitOfWorkRepository unitOfWork) : base(unitOfWork)
+        //{
+        //    _repositoryUser = unitOfWork.GetRepository<AccountUser>();
+        //    _repositoryRole = unitOfWork.GetRepository<Role>();
+        //    _repositoryAccountUserRole = unitOfWork.GetRepository<AccountUserRole>();
+        //    _provider = null;
+        //}
 
         public AccountUserService(IUnitOfWorkRepository unitOfWork, JWTProvider provider) : base(unitOfWork)
         {
@@ -101,14 +101,16 @@ namespace PersonalFinance.Service.IdentityService
                 Name = name,
                 Surname = surname,
                 email = email,
-                
+
                 UserAuthentication = new Auth
                 {
                     au_username = username,
-                    au_password = password
+                    au_password = password,
+                
                 }
 
             };
+            obj.UserAuthentication.Token = _provider.GenerateJWT(obj);
             await _repositoryUser.Add(obj);
             var userRoles = await _repositoryAccountUserRole.GetAll();
             var roleEnum = RoleEnum.User;

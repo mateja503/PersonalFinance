@@ -1,5 +1,7 @@
-﻿using PersonalFinance.Repository.General;
+﻿using Microsoft.IdentityModel.JsonWebTokens;
+using PersonalFinance.Repository.General;
 using PersonalFinance.Repository.Interface;
+using Shared.Configuration.Setup.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,5 +30,7 @@ namespace PersonalFinance.Repository.UnifOfWorkRepository
         ITransactionNotesRepository TransactionNotesRepository { get; }
 
         ITransactionRepository TransactionRepository { get;  }
+
+        
     }
 }

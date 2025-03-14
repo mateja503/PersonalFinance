@@ -27,7 +27,7 @@ namespace PersonalFinanceWeb.Controllers.IdentityController
 
         }
 
-        // POST api/<AccountUserController>
+        
         [HttpPost("register")]
         public async Task<AccountUser> Register(AccoutUserRegistryModel model)
         {
