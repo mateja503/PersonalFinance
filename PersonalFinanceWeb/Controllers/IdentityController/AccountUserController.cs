@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PersonalFinance.Domain.Identity;
+using PersonalFinance.Domain.UserRegistryModel;
 using PersonalFinance.Service.UnitOfWorkService;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -27,10 +28,18 @@ namespace PersonalFinanceWeb.Controllers.IdentityController
         }
 
         // POST api/<AccountUserController>
-        [HttpPost]
-        public async Task<AccountUser> Post(AccountUser accountUser)
+        [HttpPost("register")]
+        public async Task<AccountUser> Register(AccoutUserRegistryModel model)
         {
-            return await _unitOfWorkService.AccountUserService.Add(accountUser);
+            return await _unitOfWorkService.AccountUserService.Register(model);
+
+        }
+
+
+        [HttpPost("login")]
+        public async Task<AccountUser> Login(AccountUserLoginModel model)
+        {
+            return await _unitOfWorkService.AccountUserService.Login(model);
 
         }
 

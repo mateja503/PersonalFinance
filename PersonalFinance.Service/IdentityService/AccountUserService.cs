@@ -37,10 +37,10 @@ namespace PersonalFinance.Service.IdentityService
             _provider = provider;
         }
 
-        public async Task<AccountUser> Login(AccountUser accountUser)
+        public async Task<AccountUser> Login(AccountUserLoginModel model)
         {
-            string username = accountUser.UserAuthentication.au_username;
-            string password = accountUser.UserAuthentication.au_password;
+            string? username = model.username;
+            string? password = model.password;
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
                 throw new FormNotCompletelyEnteredException();
