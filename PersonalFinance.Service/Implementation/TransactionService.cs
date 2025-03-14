@@ -1,5 +1,6 @@
 ﻿using PersonalFinance.Domain.Models;
 using PersonalFinance.Repository.General;
+using PersonalFinance.Repository.Implementation;
 using PersonalFinance.Repository.UnifOfWorkRepository;
 using PersonalFinance.Service.General;
 using PersonalFinance.Service.Interface;
@@ -20,5 +21,17 @@ namespace PersonalFinance.Service.Implementation
             _repository = unitOfWork.GetRepository<Transaction>();
         }
 
+        public async Task<Transaction> Update(int Id, Transaction transaction)
+        {
+            var obj = await _repository.Get(u => u.Id == Id);
+
+            obj.amount = transaction.amount;
+            obj.dateTime = transaction.dateTime;
+            obj.TransactionNoteList = transaction.TransactionNoteList;
+            obj.TransactionType = transaction.TransactionType;
+            obj.CategoryId = obj.CategoryId;
+
+            return await ((TransactionRepository)_repository).Update(obj);
+        }
     }
 }

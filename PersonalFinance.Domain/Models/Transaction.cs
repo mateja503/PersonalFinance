@@ -26,7 +26,6 @@ namespace PersonalFinance.Domain.Models
 
         public virtual List<TransactionNotes?> TransactionNoteList { get; set; }
 
-        public bool ShouldSerializeLazyLoader() { return false; }
 
 
     }

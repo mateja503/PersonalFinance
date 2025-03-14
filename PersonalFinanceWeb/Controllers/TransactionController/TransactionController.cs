@@ -29,20 +29,26 @@ namespace PersonalFinanceWeb.Controllers.TransactionController
 
         // POST api/<TransactionController>
         [HttpPost]
-        public void Post([FromBody]string value)
+        public async Task<Transaction> Post(Transaction transaction)
         {
+            return await _unitOfWorkService.TransactionService.Add(transaction);
+
         }
 
         // PUT api/<TransactionController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public async Task<Transaction> Put(int Id, Transaction transaction)
         {
+            return await _unitOfWorkService.TransactionService.Update(Id,transaction);
+
         }
 
         // DELETE api/<TransactionController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<Transaction> Delete(int Id)
         {
+            return await _unitOfWorkService.TransactionService.Delete(u=>u.Id == Id);
+
         }
     }
 }
