@@ -9,11 +9,7 @@ using PersonalFinance.Repository.UnifOfWorkRepository;
 using PersonalFinance.Service.General;
 using PersonalFinance.Service.IdentityService.IdentityException;
 using Shared.Configuration.Setup.Security;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;   
+
 namespace PersonalFinance.Service.IdentityService
 {
     public class AccountUserService : GeneralService<AccountUser>, IAccountUserService
