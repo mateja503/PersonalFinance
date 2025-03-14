@@ -19,7 +19,16 @@ namespace PersonalFinance.Service.IdentityService
         private readonly IGeneralRepository<Role> _repositoryRole;
         private readonly IGeneralRepository<AccountUserRole> _repositoryAccountUserRole;
         
-        private readonly JWTProvider _provider;
+        private readonly JWTProvider? _provider;
+
+        public AccountUserService(IUnitOfWorkRepository unitOfWork) : base(unitOfWork)
+        {
+            _repositoryUser = unitOfWork.GetRepository<AccountUser>();
+            _repositoryRole = unitOfWork.GetRepository<Role>();
+            _repositoryAccountUserRole = unitOfWork.GetRepository<AccountUserRole>();
+            _provider = null;
+        }
+
         public AccountUserService(IUnitOfWorkRepository unitOfWork, JWTProvider provider) : base(unitOfWork)
         {
             _repositoryUser = unitOfWork.GetRepository<AccountUser>();
@@ -132,6 +141,22 @@ namespace PersonalFinance.Service.IdentityService
 
 
 
+        }
+
+        public async Task<AccountUser> Update(int Id, AccountUser accountUser)
+        {
+            var obj = await _repositoryUser.Get(u => u.Id == Id);
+
+            obj.Name = accountUser.Name;
+            obj.Surname = accountUser.Surname;
+            obj.email = accountUser.email;
+            obj.Roles = accountUser.Roles;
+            obj.AccontUserFinancialGoalList = accountUser.AccontUserFinancialGoalList;
+            obj.AccountUserBudgetList = accountUser.AccountUserBudgetList;
+            obj.UserAuthentication.au_username = accountUser.UserAuthentication.au_username;
+            obj.UserAuthentication.au_password = accountUser.UserAuthentication.au_password;
+
+            return await ((AccountUserRepository)_repositoryUser).Update(obj);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using PersonalFinance.Domain.Models;
+﻿using PersonalFinance.Domain.Identity;
+using PersonalFinance.Domain.Identity.RoleManager;
+using PersonalFinance.Domain.Models;
 using PersonalFinance.Repository.Data;
 using PersonalFinance.Repository.General;
 using PersonalFinance.Repository.Implementation;
@@ -32,6 +34,12 @@ namespace PersonalFinance.Repository.UnifOfWorkRepository
 
         public IAccountUserFinancialGoalsRepository AccountUserFinancialGoalsRepository { get; private set; }
 
+        public IAccountUserRepository AccountUserRepository { get; private set; }
+
+        public IRoleRepository RoleRepository { get; private set; }
+
+        public IAccountUserRoleRepository AccountUserRoleRepository { get; private set; }
+
         public UnitOfWorkRepository(ApplicationDbContext db)
         {
             _db = db;
@@ -43,6 +51,10 @@ namespace PersonalFinance.Repository.UnifOfWorkRepository
             NoteRepository = new NoteRepository(_db);
             TransactionNotesRepository = new TransactionNotesRepository(_db);
             TransactionRepository = new TransactionRepository(_db);
+            AccountUserRepository = new AccountUserRepository(_db);
+            RoleRepository = new RoleRepository(_db);
+            AccountUserRoleRepository = new AccountUserRoleRepository(_db);
+
 
 
 
@@ -67,6 +79,13 @@ namespace PersonalFinance.Repository.UnifOfWorkRepository
                 return (IGeneralRepository<T>)TransactionRepository;
             if (typeof(T) == typeof(AccountUserFinancialGoals))
                 return (IGeneralRepository<T>)AccountUserFinancialGoalsRepository;
+            if (typeof(T) == typeof(AccountUser))
+                return (IGeneralRepository<T>)AccountUserRepository;
+            if (typeof(T) == typeof(Role))
+                return (IGeneralRepository<T>)RoleRepository;
+            if (typeof(T) == typeof(AccountUserRole))
+                return (IGeneralRepository<T>)AccountUserRoleRepository;
+
 
             throw new NotImplementedException($"No repository found for type {typeof(T).Name}");
         }

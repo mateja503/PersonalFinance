@@ -22,7 +22,6 @@ namespace PersonalFinance.Service.IdentityService.RoleService
             _repository = unitOfWork.GetRepository<Role>();
         }
 
-        //TODO:
         public async Task<Role> Update(int Id, Role role)
         {
             var obj = await _repository.Get(u => u.Id == Id);

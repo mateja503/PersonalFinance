@@ -1,4 +1,6 @@
-﻿using PersonalFinance.Service.Interface;
+﻿using PersonalFinance.Service.IdentityService;
+using PersonalFinance.Service.IdentityService.RoleService;
+using PersonalFinance.Service.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,5 +27,11 @@ namespace PersonalFinance.Service.UnitOfWorkService
         ITransactionNoteService TransactionNoteService {get;}
 
         ITransactionService TransactionService { get; }
+
+        IAccountUserService AccountUserService { get; }
+
+        IRoleService RoleService { get; }
+
+        IAccountUserRoleService AccountUserRoleService { get; }
     }
 }

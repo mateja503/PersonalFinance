@@ -32,6 +32,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddTransient<IUnitOfWorkRepository, UnitOfWorkRepository>();
 builder.Services.AddTransient<IUnitOfWorkService, UnitOfWorkService>();
+builder.Services.AddTransient<JWTProvider>();
 
 
 //builder.Services.ConfigureOptions<JwtOptionsSetup>();//added for Jwt

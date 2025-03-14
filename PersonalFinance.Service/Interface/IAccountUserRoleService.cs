@@ -10,6 +10,6 @@ namespace PersonalFinance.Service.Interface
 {
     public interface IAccountUserRoleService : IGeneralService<AccountUserRole>
     {
-        
+        public Task<AccountUserRole> Update(int Id, AccountUserRole accountUserRole);
     }
 }

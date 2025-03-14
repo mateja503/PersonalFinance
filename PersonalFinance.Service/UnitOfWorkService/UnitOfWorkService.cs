@@ -1,4 +1,6 @@
 ﻿using PersonalFinance.Repository.UnifOfWorkRepository;
+using PersonalFinance.Service.IdentityService;
+using PersonalFinance.Service.IdentityService.RoleService;
 using PersonalFinance.Service.Implementation;
 using PersonalFinance.Service.Interface;
 using System;
@@ -31,6 +33,11 @@ namespace PersonalFinance.Service.UnitOfWorkService
 
         public ITransactionService TransactionService { get; private set; }
 
+        public IAccountUserService AccountUserService { get; private set; }
+
+        public IRoleService RoleService { get; private set; }
+
+        public IAccountUserRoleService AccountUserRoleService { get; private set; }
 
         public UnitOfWorkService(IUnitOfWorkRepository unitOfWork)
         {
@@ -43,7 +50,9 @@ namespace PersonalFinance.Service.UnitOfWorkService
             NoteService = new NoteService(_unitOfWork);
             TransactionNoteService = new TransactionNoteService(_unitOfWork);
             TransactionService = new TransactionService(_unitOfWork);
-
+            AccountUserService = new AccountUserService(_unitOfWork);
+            RoleService = new RoleService(_unitOfWork);
+            AccountUserRoleService = new AccountUserRoleService(_unitOfWork);
 
         }
     }

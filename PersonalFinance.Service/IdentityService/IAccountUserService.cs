@@ -13,5 +13,7 @@ namespace PersonalFinance.Service.IdentityService
     {
         public Task<AccountUser> Login(AccountUser accountUser);
         public Task<AccountUser> Register(AccoutUserRegistryModel model );
+
+        public Task<AccountUser> Update(int Id, AccountUser accountUser);
     }
 }
