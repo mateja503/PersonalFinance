@@ -21,6 +21,20 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend",
+        policy => 
+        {
+            policy.WithOrigins("http://localhost:4200/")
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyMethod();
+        
+        });   
+
+});
+
 
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -59,6 +73,8 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 
 app.UseRouting();
+
+app.UseCors("AllowFrontEnd");
 
 app.UseAuthorization();
 
