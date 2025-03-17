@@ -21,13 +21,7 @@ namespace PersonalFinance.Service.IdentityService
         
         private readonly JWTProvider? _provider;
 
-        //public AccountUserService(IUnitOfWorkRepository unitOfWork) : base(unitOfWork)
-        //{
-        //    _repositoryUser = unitOfWork.GetRepository<AccountUser>();
-        //    _repositoryRole = unitOfWork.GetRepository<Role>();
-        //    _repositoryAccountUserRole = unitOfWork.GetRepository<AccountUserRole>();
-        //    _provider = null;
-        //}
+       
 
         public AccountUserService(IUnitOfWorkRepository unitOfWork, JWTProvider provider) : base(unitOfWork)
         {
@@ -130,8 +124,8 @@ namespace PersonalFinance.Service.IdentityService
             var r = new AccountUserRole
             {
 
-                AccountUser = obj,
-                Role = role
+                AccountUserId = obj.Id,
+                RoleId = role.Id
 
             };
 
