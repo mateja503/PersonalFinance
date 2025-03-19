@@ -29,7 +29,7 @@ namespace PersonalFinance.Service.Implementation
             obj.dateTime = transaction.dateTime;
             obj.TransactionNoteList = transaction.TransactionNoteList;
             obj.TransactionType = transaction.TransactionType;
-            obj.CategoryId = obj.CategoryId;
+            obj.CategoryId = transaction.CategoryId;
 
             return await ((TransactionRepository)_repository).Update(obj);
         }

@@ -49,5 +49,13 @@ namespace PersonalFinanceWeb.Controllers.TransactionNoteController
             return await _unitOfWorkService.TransactionNoteService.Delete(u=>u.Id == Id);
 
         }
+
+        // DELETE api/<TransactionNoteController>/byTransactionId/5
+        [HttpDelete("byTransactionId/{id}")]
+        public async Task<TransactionNotes> DeleteByTransactionId(int Id)
+        {
+            return await _unitOfWorkService.TransactionNoteService.Delete(u => u.TransactionId == Id);
+
+        }
     }
 }
