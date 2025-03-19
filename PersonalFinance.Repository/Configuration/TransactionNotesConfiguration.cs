@@ -24,7 +24,7 @@ namespace PersonalFinance.Repository.Configuration
               builder.HasOne(u => u.Note)
                 .WithMany(u => u.TransactionNoteList)
                 .HasForeignKey(u => u.NoteId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
         }
     }
