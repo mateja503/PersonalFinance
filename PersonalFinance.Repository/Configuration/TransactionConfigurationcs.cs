@@ -29,7 +29,7 @@ namespace PersonalFinance.Repository.Configuration
             builder.HasOne(u => u.Category)
                 .WithMany(u => u.TransactionList)
                 .HasForeignKey(u=>u.CategoryId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.SetNull);
          
         }
     }
