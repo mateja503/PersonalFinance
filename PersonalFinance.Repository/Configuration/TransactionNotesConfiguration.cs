@@ -18,13 +18,13 @@ namespace PersonalFinance.Repository.Configuration
            builder.HasOne(u => u.Transaction)
                 .WithMany(u => u.TransactionNoteList)
                 .HasForeignKey(u => u.TransactionId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
 
               builder.HasOne(u => u.Note)
                 .WithMany(u => u.TransactionNoteList)
                 .HasForeignKey(u => u.NoteId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.SetNull);
 
         }
     }
