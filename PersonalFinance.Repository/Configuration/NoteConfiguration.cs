@@ -16,7 +16,6 @@ namespace PersonalFinance.Repository.Configuration
             builder.HasKey(u => u.Id);
 
             builder.Property(u => u.Text)
-                .IsRequired()
                 .HasMaxLength(500);
            
 
