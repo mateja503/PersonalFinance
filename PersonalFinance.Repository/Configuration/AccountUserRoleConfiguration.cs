@@ -18,12 +18,12 @@ namespace PersonalFinance.Repository.Configuration
             builder.HasOne(u => u.AccountUser)
                 .WithMany(u => u.Roles)
                 .HasForeignKey(u => u.AccountUserId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(u => u.Role)
                 .WithMany(u => u.AccountUsers)
                 .HasForeignKey(u => u.RoleId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
 
 
                 
