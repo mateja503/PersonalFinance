@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using PersonalFinance.Domain.Identity;
 using PersonalFinance.Domain.UserRegistryModel;
 using PersonalFinance.Service.UnitOfWorkService;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -27,7 +31,15 @@ namespace PersonalFinanceWeb.Controllers.IdentityController
 
         }
 
-        
+        [HttpGet("validate-user")]
+        public async Task<AccountUser> GetCurrentUser()
+        {
+
+            return await _unitOfWorkService.AccountUserService
+                .ValidateSession(Request.Headers.Authorization.ToString().Replace("Bearer ", ""));
+
+        }
+
         [HttpPost("register")]
         public async Task<AccountUser> Register(AccoutUserRegistryModel model)
         {

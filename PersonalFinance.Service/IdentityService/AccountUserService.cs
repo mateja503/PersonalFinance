@@ -106,6 +106,7 @@ namespace PersonalFinance.Service.IdentityService
             };
             obj.UserAuthentication.Token = _provider.GenerateJWT(obj);
             await _repositoryUser.Add(obj);
+            _ = obj.UserAuthentication;
             var userRoles = await _repositoryAccountUserRole.GetAll();
             var roleEnum = RoleEnum.User;
            
@@ -153,6 +154,19 @@ namespace PersonalFinance.Service.IdentityService
             obj.UserAuthentication.au_password = accountUser.UserAuthentication.au_password;
 
             return await ((AccountUserRepository)_repositoryUser).Update(obj);
+        }
+
+        public async Task<AccountUser> ValidateSession(string token)
+        {
+
+            AccountUser? user = await _repositoryUser.Get(u => u.UserAuthentication.Token == token);
+            if (user == null) 
+            {
+                throw new UnauthorizedAccessException("Invalid user ID format in token.");
+            }
+            _ = user.Roles;
+            //_repositoryUser.Detach();
+            return user;
         }
     }
 }
