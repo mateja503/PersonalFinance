@@ -19,7 +19,7 @@ namespace PersonalFinance.Repository.General
            IQueryable<T> query = _db.Set<T>();
             query = query.Where(filter);
             var result = await query.SingleOrDefaultAsync();
-            Detach();
+            //Detach();
             return result;
         }
 
@@ -31,12 +31,12 @@ namespace PersonalFinance.Repository.General
                 if (filter == null)
                 {
                     var result = await query.ToListAsync();
-                    Detach();
+                    //Detach();
                     return result;
                 }
 
                 query = query.Where(filter);
-                Detach();
+                //Detach();
                 return await query.ToListAsync();
             }
             catch (Exception e) 
@@ -57,7 +57,7 @@ namespace PersonalFinance.Repository.General
             IQueryable<T> query = _db.Set<T>();
             query = query.Where(filter);
             var result = await query.SingleOrDefaultAsync();
-            Detach();
+            //Detach();
             _db.Set<T>().Remove(result);
             await _db.SaveChangesAsync();
             return result;
@@ -75,6 +75,9 @@ namespace PersonalFinance.Repository.General
             _db.ChangeTracker.Clear();
         }
 
-     
+        //public void Attach(T entity)
+        //{
+        //    _db.Attach(T);
+        //}
     }
 }

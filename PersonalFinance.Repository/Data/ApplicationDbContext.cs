@@ -36,14 +36,15 @@ namespace PersonalFinance.Repository.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //base.OnConfiguring(optionsBuilder);// This is not required unless you're extending an existing configuration.
+           // This is not required unless you're extending an existing configuration.
             optionsBuilder.UseLazyLoadingProxies();
+            base.OnConfiguring(optionsBuilder);
         }
 
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
         {
-            base.OnModelCreating(modelbuilder);
+           
 
             new BudgetConfiguration().Configure(modelbuilder.Entity<Budget>());
             new CategoryConfiguration().Configure(modelbuilder.Entity<Category>());
@@ -157,7 +158,8 @@ namespace PersonalFinance.Repository.Data
 
 
 
-
+            base.OnModelCreating(modelbuilder);
         }
+
     }
 }

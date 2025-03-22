@@ -1,5 +1,6 @@
 ﻿using Azure.Core;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using PersonalFinance.Domain.Identity;
 using PersonalFinance.Domain.Identity.RoleManager;
 using PersonalFinance.Domain.Identity.RoleManager.Enumiration;
@@ -57,7 +58,7 @@ namespace PersonalFinance.Service.IdentityService
             user.UserAuthentication.Token = _provider.GenerateJWT(user);
             await ((AccountUserRepository)_repositoryUser).Update(user);
             
-            _repositoryUser.Detach();
+            //_repositoryUser.Detach();
             return user;
 
         }
@@ -132,7 +133,7 @@ namespace PersonalFinance.Service.IdentityService
 
             await _repositoryAccountUserRole.Add(r);
 
-            _repositoryAccountUserRole.Detach();
+            //_repositoryAccountUserRole.Detach();
 
             return obj;
 
@@ -164,7 +165,13 @@ namespace PersonalFinance.Service.IdentityService
             {
                 throw new UnauthorizedAccessException("Invalid user ID format in token.");
             }
-            _ = user.Roles;
+            //_repositoryUser.Attach();
+            //_ = user.Roles;
+            //_ = user.AccontUserFinancialGoalList;
+            //var r = user;
+
+            //var isProxy = user.GetType().Namespace == "System.Data.Entity.DynamicProxies";
+            //Console.WriteLine($"Is proxy: {isProxy}");
             //_repositoryUser.Detach();
             return user;
         }

@@ -22,5 +22,7 @@ namespace PersonalFinance.Repository.General
         public Task<List<T>> DeleteRange(IEnumerable<T> enteties);
 
         public void Detach();
+
+        //public void Attach();
     }
 }

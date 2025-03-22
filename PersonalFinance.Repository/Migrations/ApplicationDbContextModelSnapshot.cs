@@ -57,7 +57,7 @@ namespace PersonalFinance.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AccountUsers");
+                    b.ToTable("AccountUsers", (string)null);
                 });
 
             modelBuilder.Entity("PersonalFinance.Domain.Identity.AccountUserRole", b =>
@@ -80,7 +80,7 @@ namespace PersonalFinance.Repository.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AccountUserRoles");
+                    b.ToTable("AccountUserRoles", (string)null);
                 });
 
             modelBuilder.Entity("PersonalFinance.Domain.Identity.RoleManager.Role", b =>
@@ -96,7 +96,7 @@ namespace PersonalFinance.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Roles");
+                    b.ToTable("Roles", (string)null);
                 });
 
             modelBuilder.Entity("PersonalFinance.Domain.Models.AccountUserBudget", b =>
@@ -124,7 +124,7 @@ namespace PersonalFinance.Repository.Migrations
 
                     b.HasIndex("Categoryid");
 
-                    b.ToTable("AccountUserBudgets");
+                    b.ToTable("AccountUserBudgets", (string)null);
                 });
 
             modelBuilder.Entity("PersonalFinance.Domain.Models.AccountUserFinancialGoals", b =>
@@ -147,7 +147,7 @@ namespace PersonalFinance.Repository.Migrations
 
                     b.HasIndex("FinancialGoalsId");
 
-                    b.ToTable("AccountUserFinancialGoals");
+                    b.ToTable("AccountUserFinancialGoals", (string)null);
                 });
 
             modelBuilder.Entity("PersonalFinance.Domain.Models.Budget", b =>
@@ -166,7 +166,7 @@ namespace PersonalFinance.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Budgets");
+                    b.ToTable("Budgets", (string)null);
 
                     b.HasData(
                         new
@@ -192,7 +192,7 @@ namespace PersonalFinance.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
 
                     b.HasData(
                         new
@@ -228,7 +228,7 @@ namespace PersonalFinance.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FinancialGoals");
+                    b.ToTable("FinancialGoals", (string)null);
 
                     b.HasData(
                         new
@@ -254,7 +254,7 @@ namespace PersonalFinance.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Notes");
+                    b.ToTable("Notes", (string)null);
 
                     b.HasData(
                         new
@@ -293,7 +293,7 @@ namespace PersonalFinance.Repository.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Transactions");
+                    b.ToTable("Transactions", (string)null);
 
                     b.HasData(
                         new
@@ -334,7 +334,7 @@ namespace PersonalFinance.Repository.Migrations
 
                     b.HasIndex("TransactionId");
 
-                    b.ToTable("TransactionNotes");
+                    b.ToTable("TransactionNotes", (string)null);
 
                     b.HasData(
                         new
@@ -375,7 +375,7 @@ namespace PersonalFinance.Repository.Migrations
 
                             b1.HasKey("AccountUserId");
 
-                            b1.ToTable("AccountUsers");
+                            b1.ToTable("AccountUsers", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("AccountUserId");

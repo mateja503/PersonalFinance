@@ -24,7 +24,7 @@ namespace PersonalFinance.Service.Implementation
         {
             var objs = await _repository.GetAll(u => u.Month == month);
             double result = objs.Select(u => u.budgetAmount).Sum() ?? 0;
-            _repository.Detach();
+            //_repository.Detach();
             return result;
         }
 
@@ -34,7 +34,7 @@ namespace PersonalFinance.Service.Implementation
         {
             var obj = await _repository.Get(u => u.Year == year && u.Month == month);
             double result = obj.budgetAmount ?? 0;
-            _repository.Detach();
+            //_repository.Detach();
             return result;
         }
 
@@ -42,7 +42,7 @@ namespace PersonalFinance.Service.Implementation
         {
             var objs = await _repository.GetAll(u => u.Year == year);
             double result = objs.Select(u => u.budgetAmount).Sum() ?? 0;
-            _repository.Detach();
+            //_repository.Detach();
             return result;
         }
 
@@ -53,7 +53,7 @@ namespace PersonalFinance.Service.Implementation
 
             var result =  await ((IBudgetRepository)_repository).Update(obj);
 
-            _repository.Detach();
+            //_repository.Detach();
 
             return result;
 
@@ -66,7 +66,7 @@ namespace PersonalFinance.Service.Implementation
 
             var result = await((IBudgetRepository)_repository).Update(obj);
 
-            _repository.Detach();
+            //_repository.Detach();
 
             return result;
         }
@@ -76,7 +76,7 @@ namespace PersonalFinance.Service.Implementation
             var obj = await _repository.Get(u => u.Id == Id);
             var result = obj.budgetAmount < 0;
 
-            _repository.Detach();
+            //_repository.Detach();
 
             return result;
         }
@@ -87,7 +87,7 @@ namespace PersonalFinance.Service.Implementation
             var obj = await _repository.Get(u => u.Id == Id);
             var result = obj.budgetAmount;
 
-            _repository.Detach();
+            //_repository.Detach();
             return result ?? 0;
 
         }

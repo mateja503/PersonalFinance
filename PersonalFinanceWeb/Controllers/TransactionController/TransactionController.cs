@@ -24,6 +24,8 @@ namespace PersonalFinanceWeb.Controllers.TransactionController
         [HttpGet("{id}")]
         public async Task<Transaction> Get(int id)
         {
+            //var t = await _unitOfWorkService.TransactionService.Get(u => u.Id == id);
+            //_ = t.TransactionNoteList;
             return await _unitOfWorkService.TransactionService.Get(u=> u.Id == id);
         }
 

@@ -16,6 +16,7 @@ namespace PersonalFinance.Service.General
 
         public async Task<T> Get(Expression<Func<T, bool>> filter)
         {
+            
             return await _repository.Get(filter);
         }
 
@@ -42,6 +43,7 @@ namespace PersonalFinance.Service.General
         public void Detach()
         {
             _repository.Detach();
+         
         }
 
      
