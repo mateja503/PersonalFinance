@@ -28,11 +28,7 @@ namespace PersonalFinanceWeb.Controllers.BudgetController
         [HttpGet("{id}")]
         public async Task<Budget> Get(int id)
         {
-            var budget = await _unitOfWorkService.BudgetService.Get(u => u.Id == id);
-            _ = budget.AccountUserBudgetList;
-            var result = budget;
-            var isProxy = budget.GetType().Namespace == "System.Data.Entity.DynamicProxies";
-            Console.WriteLine($"Is proxy: {isProxy}");
+          
             return await _unitOfWorkService.BudgetService.Get(u => u.Id == id);
         }
 
