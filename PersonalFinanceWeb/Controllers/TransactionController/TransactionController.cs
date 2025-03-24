@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NuGet.Protocol;
 using PersonalFinance.Domain.Models;
-using PersonalFinance.Service.UnitOfWorkService;
+using PersonalFinance.Service.Interface;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,15 +9,15 @@ namespace PersonalFinanceWeb.Controllers.TransactionController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TransactionController(IUnitOfWorkService unitOfWorkService) : ControllerBase
+    public class TransactionController(ITransactionService _service) : ControllerBase
     {
-        private readonly IUnitOfWorkService _unitOfWorkService = unitOfWorkService;
+        private readonly ITransactionService service = _service;
 
         // GET: api/<TransactionController>
         [HttpGet("all")]
         public async Task<List<Transaction>> GetAll()
         {
-            return await _unitOfWorkService.TransactionService.GetAll();
+            return await service.GetAll();
         }
 
         // GET api/<TransactionController>/5
@@ -26,7 +26,7 @@ namespace PersonalFinanceWeb.Controllers.TransactionController
         {
             //var t = await _unitOfWorkService.TransactionService.Get(u => u.Id == id);
             //_ = t.TransactionNoteList;
-            return await _unitOfWorkService.TransactionService.Get(u => u.Id == id);
+            return await service.Get(u => u.Id == id);
 
             //return await _unitOfWorkService.TransactionService.GetTransaction(id);
         }
@@ -35,7 +35,7 @@ namespace PersonalFinanceWeb.Controllers.TransactionController
         [HttpPost]
         public async Task<Transaction> Post(Transaction transaction)
         {
-            return await _unitOfWorkService.TransactionService.Add(transaction);
+            return await service.Add(transaction);
 
         }
 
@@ -43,7 +43,7 @@ namespace PersonalFinanceWeb.Controllers.TransactionController
         [HttpPut("{id}")]
         public async Task<Transaction> Put(int Id, Transaction transaction)
         {
-            return await _unitOfWorkService.TransactionService.Update(Id,transaction);
+            return await service.Update(Id,transaction);
 
         }
 
@@ -51,7 +51,7 @@ namespace PersonalFinanceWeb.Controllers.TransactionController
         [HttpDelete("{id}")]
         public async Task<Transaction> Delete(int Id)
         {
-            return await _unitOfWorkService.TransactionService.Delete(u=>u.Id == Id);
+            return await service.Delete(u=>u.Id == Id);
 
         }
     }

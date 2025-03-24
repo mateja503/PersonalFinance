@@ -1,8 +1,8 @@
 ﻿using PersonalFinance.Domain.Models;
+using PersonalFinance.Repository.Data;
 using PersonalFinance.Repository.General;
 using PersonalFinance.Repository.Implementation;
 using PersonalFinance.Repository.Interface;
-using PersonalFinance.Repository.UnifOfWorkRepository;
 using PersonalFinance.Service.General;
 using PersonalFinance.Service.Interface;
 using System.Runtime.InteropServices;
@@ -10,13 +10,13 @@ using System.Runtime.InteropServices;
 
 namespace PersonalFinance.Service.Implementation
 {
-    public class BudgetService : GeneralService<Budget>, IBudgetService
+    public class BudgetService : GeneralService<Budget,IBudgetRepository>, IBudgetService
     {
-        private readonly IGeneralRepository<Budget> _repository;
+        private readonly IBudgetRepository _repository;
 
-        public BudgetService(IUnitOfWorkRepository unitOfWork) : base(unitOfWork)
+        public BudgetService(IBudgetRepository repository,ApplicationDbContext db) : base(repository)
         {
-            _repository = unitOfWork.GetRepository<Budget>();
+            _repository = new  BudgetRepository(db);
         }
 
       

@@ -2,7 +2,6 @@
 using PersonalFinance.Domain.Models;
 using PersonalFinance.Service.General;
 using PersonalFinance.Service.Interface;
-using PersonalFinance.Service.UnitOfWorkService;
 using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 
@@ -12,16 +11,16 @@ namespace PersonalFinanceWeb.Controllers.BudgetController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BudgetController(IUnitOfWorkService unitOfWork): ControllerBase
+    public class BudgetController(IBudgetService _service) : ControllerBase
     {
 
-        private readonly IUnitOfWorkService _unitOfWorkService = unitOfWork;
+        private readonly IBudgetService service = _service;
 
         // GET: api/<BudgetController>
         [HttpGet("all")]
         public async Task<List<Budget>> GetAll()
         {
-            return await _unitOfWorkService.BudgetService.GetAll(); 
+            return await service.GetAll(); 
         }
 
         // GET api/<BudgetController>/5
@@ -29,21 +28,21 @@ namespace PersonalFinanceWeb.Controllers.BudgetController
         public async Task<Budget> Get(int id)
         {
           
-            return await _unitOfWorkService.BudgetService.Get(u => u.Id == id);
+            return await service.Get(u => u.Id == id);
         }
 
         // POST api/<BudgetController>
         [HttpPost]
         public async Task<Budget> Post(Budget budget)
         {
-            return await _unitOfWorkService.BudgetService.Add(budget);
+            return await service.Add(budget);
         }
 
         // PUT api/<BudgetController>/5
         [HttpPut("{id}")]
         public async Task<Budget> Put(int id,Budget budget)
         {
-            return await _unitOfWorkService.BudgetService.Update(id, budget);
+            return await service.Update(id, budget);
 
         }
 
@@ -51,7 +50,7 @@ namespace PersonalFinanceWeb.Controllers.BudgetController
         [HttpDelete("{id}")]
         public async Task<Budget> Delete(int Id)
         {
-            return await _unitOfWorkService.BudgetService.Delete(u=>u.Id == Id);
+            return await service.Delete(u=>u.Id == Id);
         }
     }
 }

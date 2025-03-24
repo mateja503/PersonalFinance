@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PersonalFinance.Domain.Models;
-using PersonalFinance.Repository.UnifOfWorkRepository;
-using PersonalFinance.Service.UnitOfWorkService;
+using PersonalFinance.Service.Interface;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,28 +8,28 @@ namespace PersonalFinanceWeb.Controllers.TransactionNoteController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TransactionNoteController(IUnitOfWorkService unitOfWork) : ControllerBase
+    public class TransactionNoteController(ITransactionNoteService _service) : ControllerBase
     {
-        private readonly IUnitOfWorkService _unitOfWorkService = unitOfWork;
+        private readonly ITransactionNoteService service = _service;
         // GET: api/<TransactionNoteController>
         [HttpGet("all")]
         public async Task<List<TransactionNotes>> Get()
         {
-            return await _unitOfWorkService.TransactionNoteService.GetAll();
+            return await service.GetAll();
         }
 
         // GET api/<TransactionNoteController>/5
         [HttpGet("{id}")]
         public async Task<TransactionNotes> Get(int Id)
         {
-            return await _unitOfWorkService.TransactionNoteService.Get(u=>u.Id == Id);
+            return await service.Get(u=>u.Id == Id);
         }
 
         // POST api/<TransactionNoteController>
         [HttpPost]
         public async Task<TransactionNotes> Post(TransactionNotes transactionNotes)
         {
-            return await _unitOfWorkService.TransactionNoteService.Add(transactionNotes);
+            return await service.Add(transactionNotes);
 
         }
 
@@ -38,7 +37,7 @@ namespace PersonalFinanceWeb.Controllers.TransactionNoteController
         [HttpPut("{id}")]
         public async Task<TransactionNotes> Put(int Id, TransactionNotes transactionNotes)
         {
-            return await _unitOfWorkService.TransactionNoteService.Update(Id,transactionNotes);
+            return await service.Update(Id,transactionNotes);
 
         }
 
@@ -46,7 +45,7 @@ namespace PersonalFinanceWeb.Controllers.TransactionNoteController
         [HttpDelete("{id}")]
         public async Task<TransactionNotes> Delete(int Id)
         {
-            return await _unitOfWorkService.TransactionNoteService.Delete(u=>u.Id == Id);
+            return await service.Delete(u=>u.Id == Id);
 
         }
 
@@ -54,7 +53,7 @@ namespace PersonalFinanceWeb.Controllers.TransactionNoteController
         [HttpDelete("byTransactionId/{id}")]
         public async Task<TransactionNotes> DeleteByTransactionId(int Id)
         {
-            return await _unitOfWorkService.TransactionNoteService.Delete(u => u.TransactionId == Id);
+            return await service.Delete(u => u.TransactionId == Id);
 
         }
     }

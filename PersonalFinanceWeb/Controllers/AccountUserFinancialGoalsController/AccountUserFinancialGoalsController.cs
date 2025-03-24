@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 using PersonalFinance.Domain.Models;
-using PersonalFinance.Service.UnitOfWorkService;
+using PersonalFinance.Service.Interface;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,21 +9,21 @@ namespace PersonalFinanceWeb.Controllers.AccountUserFinancialGoalsController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountUserFinancialGoalsController(IUnitOfWorkService unitOfWork) : ControllerBase
+    public class AccountUserFinancialGoalsController(IAccountUserFinancialGoalsService _service) : ControllerBase
     {
-        private readonly IUnitOfWorkService _unitOfWorkService = unitOfWork;
+        private readonly IAccountUserFinancialGoalsService service = _service;
         // GET: api/<AccountUserFinancialGoalsController>
         [HttpGet("all")]
         public async Task<List<AccountUserFinancialGoals>> Get()
         {
-            return await _unitOfWorkService.AccountUserFinancialGoalsService.GetAll();
+            return await service.GetAll();
         }
 
         // GET api/<AccountUserFinancialGoalsController>/5
         [HttpGet("{id}")]
         public async Task<AccountUserFinancialGoals> Get(int Id)
         {
-            return await _unitOfWorkService.AccountUserFinancialGoalsService.Get(u=>u.Id == Id);
+            return await service.Get(u=>u.Id == Id);
 
         }
 
@@ -30,7 +31,7 @@ namespace PersonalFinanceWeb.Controllers.AccountUserFinancialGoalsController
         [HttpPost]
         public async Task<AccountUserFinancialGoals> Post(AccountUserFinancialGoals accountUserFinancialGoals)
         {
-            return await _unitOfWorkService.AccountUserFinancialGoalsService.Add(accountUserFinancialGoals);
+            return await service.Add(accountUserFinancialGoals);
 
         }
 
@@ -38,7 +39,7 @@ namespace PersonalFinanceWeb.Controllers.AccountUserFinancialGoalsController
         [HttpPut("{id}")]
         public async Task<AccountUserFinancialGoals> Put(int Id, AccountUserFinancialGoals accountUserFinancialGoals)
         {
-            return await _unitOfWorkService.AccountUserFinancialGoalsService.Update(Id,accountUserFinancialGoals);
+            return await service.Update(Id,accountUserFinancialGoals);
 
         }
 
@@ -46,7 +47,7 @@ namespace PersonalFinanceWeb.Controllers.AccountUserFinancialGoalsController
         [HttpDelete("{id}")]
         public async Task<AccountUserFinancialGoals> Delete(int Id)
         {
-            return await _unitOfWorkService.AccountUserFinancialGoalsService.Delete(u=>u.Id == Id);
+            return await service.Delete(u=>u.Id == Id);
 
         }
     }

@@ -1,8 +1,10 @@
-﻿using PersonalFinance.Domain.Identity;
+﻿using Microsoft.EntityFrameworkCore.Query;
+using PersonalFinance.Domain.Identity;
 using PersonalFinance.Domain.Models;
+using PersonalFinance.Repository.Data;
 using PersonalFinance.Repository.General;
 using PersonalFinance.Repository.Implementation;
-using PersonalFinance.Repository.UnifOfWorkRepository;
+using PersonalFinance.Repository.Interface;
 using PersonalFinance.Service.General;
 using PersonalFinance.Service.Interface;
 using System;
@@ -14,19 +16,18 @@ using System.Threading.Tasks;
 
 namespace PersonalFinance.Service.Implementation
 {
-    public class AccountUserBudgetService : GeneralService<AccountUserBudget>, IAccountUserBudgetService
+    public class AccountUserBudgetService : GeneralService<AccountUserBudget, IAccountUserBudgetRepository>, IAccountUserBudgetService
     {
-        private readonly IGeneralRepository<AccountUserBudget> _repository; 
+        private readonly IAccountUserBudgetRepository _repository;
 
-        public AccountUserBudgetService(IUnitOfWorkRepository unitOfWork) : base(unitOfWork)
+        public AccountUserBudgetService(IAccountUserBudgetRepository repository, ApplicationDbContext _db) : base(repository)
         {
-            _repository =  unitOfWork.GetRepository<AccountUserBudget>();
+            _repository = new AccountUserBudgetRepository(_db);
         }
 
         public async Task<AccountUserBudget> Update(int Id, AccountUserBudget accountUserBudget)
         {
             var obj = await _repository.Get(u => u.Id == Id);
-
             obj.AccountUserId = obj.AccountUserId;
             obj.BudgetId = obj.BudgetId;
             obj.Categoryid = obj.Categoryid;

@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PersonalFinance.Domain.Identity;
 using PersonalFinance.Repository.Data;
-using PersonalFinance.Repository.UnifOfWorkRepository;
+using PersonalFinance.Repository.Extenstions;
+using PersonalFinance.Service.Extenstions;
 using PersonalFinance.Service.Implementation;
 using PersonalFinance.Service.Interface;
-using PersonalFinance.Service.UnitOfWorkService;
 using Shared.Configuration.Setup.Security;
 using System;
 using System.Text.Json.Serialization;
@@ -38,9 +38,10 @@ builder.Services.AddCors(options =>
 
 
 
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
-           .UseLazyLoadingProxies());  // Enable lazy loading
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+//           .UseLazyLoadingProxies());  // Enable lazy loading
+builder.Services.RegisterApplicationDbContext(builder.Configuration);
 
 //builder.Services.AddIdentity<AccountUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
 //    .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -49,8 +50,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer();
 
-builder.Services.AddTransient<IUnitOfWorkRepository, UnitOfWorkRepository>();
-builder.Services.AddTransient<IUnitOfWorkService, UnitOfWorkService>();
+//builder.Services.AddTransient<IUnitOfWorkRepository, UnitOfWorkRepository>();
+builder.Services.RegisterRepository();
+
+//builder.Services.AddTransient<IUnitOfWorkService, UnitOfWorkService>();
+builder.Services.RegisterServices();
+
 builder.Services.ConfigureOptions<JwtBearerOptionsSetup>();
 builder.Services.ConfigureOptions<JwtOptionsSetup>();
 builder.Services.AddTransient<JWTProvider>();

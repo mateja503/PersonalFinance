@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using PersonalFinance.Domain.Identity;
 using PersonalFinance.Domain.UserRegistryModel;
-using PersonalFinance.Service.UnitOfWorkService;
+using PersonalFinance.Service.IdentityService;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
@@ -13,21 +13,21 @@ namespace PersonalFinanceWeb.Controllers.IdentityController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountUserController(IUnitOfWorkService unitOfWork) : ControllerBase
+    public class AccountUserController(IAccountUserService _service) : ControllerBase
     {
-        private readonly IUnitOfWorkService _unitOfWorkService = unitOfWork;
+        private readonly IAccountUserService service = _service;
         // GET: api/<AccountUserController>
         [HttpGet("all")]
         public async Task<List<AccountUser>> Get()
         {
-            return await _unitOfWorkService.AccountUserService.GetAll();
+            return await service.GetAll();
         }
 
         // GET api/<AccountUserController>/5
         [HttpGet("{id}")]
         public async Task<AccountUser> Get(int Id)
         {
-            return await _unitOfWorkService.AccountUserService.Get(u=> u.Id == Id);
+            return await service.Get(u=> u.Id == Id);
 
         }
 
@@ -35,7 +35,7 @@ namespace PersonalFinanceWeb.Controllers.IdentityController
         public async Task<AccountUser> GetCurrentUser()
         {
 
-            return await _unitOfWorkService.AccountUserService
+            return await service
                 .ValidateSession(Request.Headers.Authorization.ToString().Replace("Bearer ", ""));
 
         }
@@ -43,7 +43,7 @@ namespace PersonalFinanceWeb.Controllers.IdentityController
         [HttpPost("register")]
         public async Task<AccountUser> Register(AccoutUserRegistryModel model)
         {
-            return await _unitOfWorkService.AccountUserService.Register(model);
+            return await service.Register(model);
 
         }
 
@@ -51,7 +51,7 @@ namespace PersonalFinanceWeb.Controllers.IdentityController
         [HttpPost("login")]
         public async Task<AccountUser> Login(AccountUserLoginModel model)
         {
-            return await _unitOfWorkService.AccountUserService.Login(model);
+            return await service.Login(model);
 
         }
 
@@ -59,7 +59,7 @@ namespace PersonalFinanceWeb.Controllers.IdentityController
         [HttpPut("{id}")]
         public async Task<AccountUser> Put(int Id, AccountUser accountUser)
         {
-            return await _unitOfWorkService.AccountUserService.Update(Id,accountUser);
+            return await service.Update(Id,accountUser);
 
         }
 
@@ -67,7 +67,7 @@ namespace PersonalFinanceWeb.Controllers.IdentityController
         [HttpDelete("{id}")]
         public async Task<AccountUser> Delete(int Id)
         {
-            return await _unitOfWorkService.AccountUserService.Delete(u=>u.Id == Id);
+            return await service.Delete(u=>u.Id == Id);
 
         }
     }

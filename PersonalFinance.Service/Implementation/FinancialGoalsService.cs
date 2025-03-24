@@ -1,7 +1,8 @@
 ﻿using PersonalFinance.Domain.Models;
+using PersonalFinance.Repository.Data;
 using PersonalFinance.Repository.General;
 using PersonalFinance.Repository.Implementation;
-using PersonalFinance.Repository.UnifOfWorkRepository;
+using PersonalFinance.Repository.Interface;
 using PersonalFinance.Service.General;
 using PersonalFinance.Service.Interface;
 using System;
@@ -12,13 +13,13 @@ using System.Threading.Tasks;
 
 namespace PersonalFinance.Service.Implementation
 {
-    public class FinancialGoalsService : GeneralService<FinancialGoals>, IFinancialGoalsService
+    public class FinancialGoalsService : GeneralService<FinancialGoals, IFinancialGoalsRepository>, IFinancialGoalsService
     {
-        private readonly IGeneralRepository<FinancialGoals> _repository;
+        private readonly IFinancialGoalsRepository _repository;
 
-        public FinancialGoalsService(IUnitOfWorkRepository unitOfWork) : base(unitOfWork)
+        public FinancialGoalsService(IFinancialGoalsRepository repository, ApplicationDbContext db) : base(repository)
         {
-            _repository = unitOfWork.GetRepository<FinancialGoals>();
+            _repository = new FinancialGoalsRepository(db);
         }
 
         public async Task<bool> CheckGoalReached(int Id, double amount,int year, int month)

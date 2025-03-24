@@ -1,7 +1,8 @@
 ﻿using PersonalFinance.Domain.Identity;
+using PersonalFinance.Repository.Data;
 using PersonalFinance.Repository.General;
 using PersonalFinance.Repository.Implementation;
-using PersonalFinance.Repository.UnifOfWorkRepository;
+using PersonalFinance.Repository.Interface;
 using PersonalFinance.Service.General;
 using PersonalFinance.Service.Interface;
 using System;
@@ -12,12 +13,12 @@ using System.Threading.Tasks;
 
 namespace PersonalFinance.Service.Implementation
 {
-    public class AccountUserRoleService : GeneralService<AccountUserRole>, IAccountUserRoleService
+    public class AccountUserRoleService : GeneralService<AccountUserRole, IAccountUserRoleRepository>, IAccountUserRoleService
     {
-        private readonly IGeneralRepository<AccountUserRole> _repository;
-        public AccountUserRoleService(IUnitOfWorkRepository unitOfWork) : base(unitOfWork)
+        private readonly IAccountUserRoleRepository _repository;
+        public AccountUserRoleService(IAccountUserRoleRepository repository, ApplicationDbContext db) : base(repository)
         {
-            _repository = unitOfWork.GetRepository<AccountUserRole>();
+            _repository =new AccountUserRoleRepository(db);
         }
 
         public async Task<AccountUserRole> Update(int Id, AccountUserRole accountUserRole)

@@ -1,7 +1,8 @@
 ﻿using PersonalFinance.Domain.Models;
+using PersonalFinance.Repository.Data;
 using PersonalFinance.Repository.General;
 using PersonalFinance.Repository.Implementation;
-using PersonalFinance.Repository.UnifOfWorkRepository;
+using PersonalFinance.Repository.Interface;
 using PersonalFinance.Service.General;
 using PersonalFinance.Service.Interface;
 using System;
@@ -12,13 +13,13 @@ using System.Threading.Tasks;
 
 namespace PersonalFinance.Service.Implementation
 {
-    public class TransactionNoteService : GeneralService<TransactionNotes>, ITransactionNoteService
+    public class TransactionNoteService : GeneralService<TransactionNotes,ITransactionNotesRepository>, ITransactionNoteService
     {
-        private readonly IGeneralRepository<TransactionNotes> _repository;
+        private readonly ITransactionNotesRepository _repository;
 
-        public TransactionNoteService(IUnitOfWorkRepository unitOfWork) : base(unitOfWork)
+        public TransactionNoteService(ITransactionNotesRepository repository,ApplicationDbContext db) : base(repository)
         {
-            _repository = unitOfWork.GetRepository<TransactionNotes>();
+            _repository = new TransactionNotesRepository(db);
         }
 
         public async Task<TransactionNotes> Update(int Id, TransactionNotes transactionNotes)

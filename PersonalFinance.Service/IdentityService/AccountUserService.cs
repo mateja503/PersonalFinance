@@ -5,9 +5,10 @@ using PersonalFinance.Domain.Identity;
 using PersonalFinance.Domain.Identity.RoleManager;
 using PersonalFinance.Domain.Identity.RoleManager.Enumiration;
 using PersonalFinance.Domain.UserRegistryModel;
+using PersonalFinance.Repository.Data;
 using PersonalFinance.Repository.General;
 using PersonalFinance.Repository.Implementation;
-using PersonalFinance.Repository.UnifOfWorkRepository;
+using PersonalFinance.Repository.Interface;
 using PersonalFinance.Service.General;
 using PersonalFinance.Service.IdentityService.IdentityException;
 using Shared.Configuration.Setup.Security;
@@ -15,21 +16,21 @@ using System.Reflection.Metadata.Ecma335;
 
 namespace PersonalFinance.Service.IdentityService
 {
-    public class AccountUserService : GeneralService<AccountUser>, IAccountUserService
+    public class AccountUserService : GeneralService<AccountUser,IAccountUserRepository>, IAccountUserService
     {
-        private readonly IGeneralRepository<AccountUser> _repositoryUser;
-        private readonly IGeneralRepository<Role> _repositoryRole;
-        private readonly IGeneralRepository<AccountUserRole> _repositoryAccountUserRole;
+        private readonly IAccountUserRepository _repositoryUser;
+        private readonly IRoleRepository _repositoryRole;
+        private readonly IAccountUserRoleRepository _repositoryAccountUserRole;
         
         private readonly JWTProvider? _provider;
 
        
 
-        public AccountUserService(IUnitOfWorkRepository unitOfWork, JWTProvider provider) : base(unitOfWork)
+        public AccountUserService(IAccountUserRepository repository,ApplicationDbContext db,JWTProvider provider) : base(repository)
         {
-            _repositoryUser = unitOfWork.GetRepository<AccountUser>();
-            _repositoryRole = unitOfWork.GetRepository<Role>();
-            _repositoryAccountUserRole = unitOfWork.GetRepository<AccountUserRole>();
+            _repositoryUser = new AccountUserRepository(db);
+            _repositoryRole = new RoleRepository(db);
+            _repositoryAccountUserRole = new AccountUserRoleRepository(db);
             _provider = provider;
         }
 

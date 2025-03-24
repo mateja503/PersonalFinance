@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PersonalFinance.Domain.Models;
-using PersonalFinance.Service.UnitOfWorkService;
+using PersonalFinance.Service.Interface;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,28 +8,28 @@ namespace PersonalFinanceWeb.Controllers.NoteController
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class NoteController(IUnitOfWorkService unitOfWork) : ControllerBase
+    public class NoteController(INoteService _service) : ControllerBase
     {
-        private readonly IUnitOfWorkService _unitOfWorkService = unitOfWork;
+        private readonly INoteService service = _service;
         // GET: api/<NoteController>
         [HttpGet("all")]
         public async Task<List<Note>> GetAll()
         {
-            return await _unitOfWorkService.NoteService.GetAll();
+            return await service.GetAll();
         }
 
         // GET api/<NoteController>/5
         [HttpGet("{id}")]
         public async Task<Note> Get(int Id)
         {
-            return await _unitOfWorkService.NoteService.Get(u=>u.Id == Id);
+            return await service.Get(u=>u.Id == Id);
         }
 
         // POST api/<NoteController>
         [HttpPost]
         public async Task<Note> Post(Note note)
         {
-            return await _unitOfWorkService.NoteService.Add(note);
+            return await service.Add(note);
 
         }
 
@@ -37,7 +37,7 @@ namespace PersonalFinanceWeb.Controllers.NoteController
         [HttpPut("{id}")]
         public async Task<Note> Put(int Id, Note note)
         {
-            return await _unitOfWorkService.NoteService.Update(Id,note);
+            return await service.Update(Id,note);
 
         }
 
@@ -45,7 +45,7 @@ namespace PersonalFinanceWeb.Controllers.NoteController
         [HttpDelete("{id}")]
         public async Task<Note> Delete(int Id)
         {
-            return await _unitOfWorkService.NoteService.Delete(u=>u.Id == Id);
+            return await service.Delete(u=>u.Id == Id);
 
         }
     }
