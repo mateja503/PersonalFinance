@@ -26,7 +26,9 @@ namespace PersonalFinanceWeb.Controllers.TransactionController
         {
             //var t = await _unitOfWorkService.TransactionService.Get(u => u.Id == id);
             //_ = t.TransactionNoteList;
-            return await _unitOfWorkService.TransactionService.Get(u=> u.Id == id);
+            return await _unitOfWorkService.TransactionService.Get(u => u.Id == id);
+
+            //return await _unitOfWorkService.TransactionService.GetTransaction(id);
         }
 
         // POST api/<TransactionController>

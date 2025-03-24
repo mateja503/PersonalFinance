@@ -15,10 +15,20 @@ namespace PersonalFinance.Service.Implementation
     public class TransactionService : GeneralService<Transaction>, ITransactionService
     {
         private readonly IGeneralRepository<Transaction> _repository;
+        private readonly IGeneralRepository<Category> _repositoryCategory;
 
         public TransactionService(IUnitOfWorkRepository unitOfWork) : base(unitOfWork)
         {
             _repository = unitOfWork.GetRepository<Transaction>();
+            _repositoryCategory = unitOfWork.GetRepository<Category>();
+        }
+
+        public async Task<Transaction> GetTransaction(int Id)
+        {
+            var transaction = await _repository.Get(u => u.Id == Id);
+            _ = transaction.Category;
+            _repository.Detach();
+            return transaction;
         }
 
         public async Task<Transaction> Update(int Id, Transaction transaction)
