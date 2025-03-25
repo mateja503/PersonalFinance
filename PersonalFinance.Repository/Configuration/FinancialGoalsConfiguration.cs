@@ -17,7 +17,8 @@ namespace PersonalFinance.Repository.Configuration
 
             builder.Property(u => u.goalText)
                 .IsRequired()
-                .HasMaxLength(300);
+                .HasMaxLength(300)
+                .HasColumnType("varchar(300)");
 
             builder.Property(u => u.goalReachInTime)
                 .IsRequired();

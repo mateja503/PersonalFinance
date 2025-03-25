@@ -16,7 +16,8 @@ namespace PersonalFinance.Repository.Configuration
             builder.HasKey(u => u.Id);
 
             builder.Property(u => u.Text)
-                .HasMaxLength(500);
+                .HasMaxLength(500)
+                .HasColumnType("varchar(500)");
            
 
         }

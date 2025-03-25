@@ -17,11 +17,13 @@ namespace PersonalFinance.Repository.Configuration
 
             builder.Property(u => u.Name)
                 .HasDefaultValue("")
-                .HasMaxLength(30);
+                .HasMaxLength(30)
+                .HasColumnType("varchar(30)");
 
             builder.Property(u => u.Surname)
                 .HasDefaultValue("")
-                .HasMaxLength(30);
+                .HasMaxLength(30)
+                .HasColumnType("varchar(30)");
 
             builder.Property(u => u.email)
                .IsRequired()

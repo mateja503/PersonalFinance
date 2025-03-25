@@ -17,7 +17,8 @@ namespace PersonalFinance.Repository.Configuration
 
             builder.Property(u => u.categoryName)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(100)
+                .HasColumnType("varchar(30)");
 
         }
     }
