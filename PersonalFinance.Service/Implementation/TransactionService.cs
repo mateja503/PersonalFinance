@@ -22,6 +22,11 @@ namespace PersonalFinance.Service.Implementation
             _repository = new TransactionRepository(db);
         }
 
+        //public Task<Transaction> GetAllTransactions()
+        //{
+        //   var transactions = _re
+        //}
+
         public async Task<Transaction> GetTransaction(int Id)
         {
             var transaction = await _repository.Get(u => u.Id == Id);

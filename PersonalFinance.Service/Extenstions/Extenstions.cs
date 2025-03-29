@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using PersonalFinance.Domain.Identity;
+using PersonalFinance.Service.IdentityService;
 using PersonalFinance.Service.Implementation;
 using PersonalFinance.Service.Interface;
 using System;
@@ -18,6 +19,7 @@ namespace PersonalFinance.Service.Extenstions
             services.AddTransient<IAccountUserBudgetService, AccountUserBudgetService>();
             services.AddTransient<IAccountUserFinancialGoalsService, AccountUserFinancialGoalsService>();
             services.AddTransient<IAccountUserRoleService, AccountUserRoleService>();
+            services.AddTransient<IAccountUserService, AccountUserService>();
             services.AddTransient<IBudgetService, BudgetService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IFinancialGoalsService, FinancialGoalsService>();
