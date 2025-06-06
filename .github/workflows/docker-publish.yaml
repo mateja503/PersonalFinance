@@ -1,0 +1,31 @@
+name: Build and Push Backend Docker Image
+
+on:
+  push:
+    branches:
+      - master  
+  pull_request:
+    branches:
+      - master
+    
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log in to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./PersonalFinance/Dockerfile
+          push: true
+          tags: matejanikolikj/personalfinance-backend:v1.1
