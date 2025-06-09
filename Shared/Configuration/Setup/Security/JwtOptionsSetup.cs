@@ -17,6 +17,11 @@ namespace Shared.Configuration.Setup.Security
         public void Configure(JWTOptions options) 
         {
             _configuration.GetSection("Jwt").Bind(options);
+            var jwtSecretFromEnv = Environment.GetEnvironmentVariable("JWT_SECRET_KEY");
+            if (!string.IsNullOrWhiteSpace(jwtSecretFromEnv))
+            {
+                options.SecretKey = jwtSecretFromEnv;
+            }
         }
 
 

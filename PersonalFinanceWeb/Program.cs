@@ -7,12 +7,30 @@ using PersonalFinance.Repository.Extenstions;
 using PersonalFinance.Service.Extenstions;
 using PersonalFinance.Service.Implementation;
 using PersonalFinance.Service.Interface;
+using Shared.Configuration.Options;
 using Shared.Configuration.Setup.Security;
 using System;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.AddEnvironmentVariables();
+
+var dbHost = Environment.GetEnvironmentVariable("DB_HOST") ?? "db";
+var dbName = Environment.GetEnvironmentVariable("DB_NAME") ?? "PersinalFinanceDb_part2";
+var dbUser = Environment.GetEnvironmentVariable("DB_USER") ?? "sa";
+var dbPass = Environment.GetEnvironmentVariable("SA_PASSWORD") ?? throw new Exception("SA_PASSWORD not set");
+
+var connectionString = $"Server={dbHost};Database={dbName};User ID={dbUser};Password={dbPass};TrustServerCertificate=True";
+
+
+//var jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET_KEY") ?? throw new Exception("JWT_SECRET_KEY not set");
+//builder.Services.Configure<JwtOptions>(options =>
+//{
+//    options.SecretKey = jwtSecret;
+//    options.Issuer = builder.Configuration["Jwt:Issuer"];
+//    options.Audience = builder.Configuration["Jwt:Audience"];
+//});
 // Add services to the container.
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
@@ -41,7 +59,7 @@ builder.Services.AddCors(options =>
 //builder.Services.AddDbContext<ApplicationDbContext>(options =>
 //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
 //           .UseLazyLoadingProxies());  // Enable lazy loading
-builder.Services.RegisterApplicationDbContext(builder.Configuration);
+builder.Services.RegisterApplicationDbContext(builder.Configuration, connectionString);
 
 //builder.Services.AddIdentity<AccountUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
 //    .AddEntityFrameworkStores<ApplicationDbContext>()

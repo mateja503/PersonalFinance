@@ -17,13 +17,14 @@ namespace PersonalFinance.Repository.Extenstions
     {
         public static IServiceCollection RegisterApplicationDbContext(
             this IServiceCollection services, 
-            IConfiguration configuration) 
+            IConfiguration configuration,
+            string connectionString) 
         {
 
             services.AddDbContext<ApplicationDbContext>(d => 
             {
                 d.UseLazyLoadingProxies();
-                d.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                d.UseSqlServer(connectionString);
 
             });
 
