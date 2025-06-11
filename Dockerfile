@@ -43,5 +43,9 @@ FROM base AS final
 WORKDIR /app
 COPY --from=build /app/publish .
 
+ENV PLACEHOLDER_ENV=""
+
+CMD []
+
 # Entry point
 ENTRYPOINT ["dotnet", "PersonalFinanceWeb.dll"]
