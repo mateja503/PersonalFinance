@@ -54,6 +54,10 @@ builder.Services.AddCors(options =>
 
 });
 
+builder.Services.AddHealthChecks();
+
+
+
 
 
 //builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -104,6 +108,9 @@ app.UseHttpsRedirection();
 app.UseCors("AllowFrontEnd");
 
 app.UseRouting();
+
+app.MapHealthChecks("/health");
+
 
 
 app.UseAuthentication();
