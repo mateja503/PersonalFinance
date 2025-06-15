@@ -109,8 +109,8 @@ app.UseCors("AllowFrontEnd");
 
 app.UseRouting();
 
-app.MapHealthChecks("/health");
-
+//app.MapHealthChecks("/health");
+app.MapGet("/health", () => Results.Ok("Healthy"));
 
 
 app.UseAuthentication();
